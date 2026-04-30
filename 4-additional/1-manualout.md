@@ -6,7 +6,7 @@
 
 <br>
 
-![그림 .. 가스 수동 출력 버튼](../_assets/restore.png)
+![그림4.1 가스 수동 출력 버튼](../_assets/test_button.png)
 
 <br>
 

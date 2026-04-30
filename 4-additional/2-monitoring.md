@@ -9,7 +9,7 @@
 
 <br>
 
-![그림 .. 모니터링 화면](../_assets/restore.png)
+![그림4.2 모니터링 화면](../_assets/monitoring.png)
 
 <br>
 
@@ -21,8 +21,8 @@
 |process ready|ID 설정 유무|on/off|
 |ohmic contact|토치의 부재 접촉 상태|on/off|
 |remote power status|절단기의 전원 상태|on/off|
-|voltage|전압값(V)|on/off|
-|current|전류값(A)|on/off|
-|process ID|절단기의 설정 프로세스 ID|on/off|
-|stand-off|토치-부재간 거리|on/off|
+|voltage|전압값(V)|~V|
+|current|전류값(A)|~ A|
+|process ID|절단기의 설정 프로세스 ID|#|
+|stand-off|토치-부재간 거리| mm |
 

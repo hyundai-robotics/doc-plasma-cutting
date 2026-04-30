@@ -14,7 +14,7 @@
     * [2.2.3 종료 조건](2-application/2-settings/3-end-cnd.md)
   * [2.3 로봇 모션](2-application/3-motion/README.md)
     * [2.3.1 높이 제어](2-application/3-motion/1-height-ctrl.md)
-    * [2.3.2 절단 폭 보정 기능](2-application/3-motion/2-kerf-ctrl.md)
+    * [2.3.2 절삭 폭 보정 기능](2-application/3-motion/2-kerf-ctrl.md)
   * [2.4 로봇 프로그래밍](2-application/4-programming/README.md)
     * [2.4.1 시스템 변수](2-application/4-programming/1-system-vars.md)
     * [2.4.2 plasma on/off 명령어](2-application/4-programming/2-cmd.md)
