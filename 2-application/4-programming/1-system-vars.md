@@ -11,16 +11,24 @@
 
 
   - _plasma.speed
-    - 용도 : 프로세스 ID 마다 설정된 절단 속도를 사용자가 쉽게 사용하도록 함
+    - 용도 : 프로세스 ID 마다 설정된 절단 속도를 사용자가 쉽게 입력하도록 함
     - 작동 : `plasma on,cnd=1` 명령어의 조건 번호에 설정된 절단 속도를 해당 시스템 변수로 가져옴
     - 사용법 : `move`문의 속도 변수에 해당 시스템 변수를 사용함 (mm/sec)
     - 사용 예제
         ```python
-        var v0
-        v0 = _plasma.speed
-
         plasma on,cnd=1
-        move P,spd=v0,accu=0,tool=0
-        # or
         move P,spd=_plasma.speed,accu=0,tool=0
+        ```
+
+
+  - _plasma.kerf
+    - 용도 : 절삭폭을 고려한 로봇의 쉬프트 모션 명령을 사용자가 쉽게 편집하도록 함
+    - 작동 : `plasma on,cnd=1` 명령어의 조건 번호에 설정된 절삭폭 보정량을 해당 시스템 변수로 가져옴
+    - 사용법 : `move`문의 목표 위치 작성시 해당 시스템 변수를 사용함 (mm)
+    - 사용 예제
+        ```python
+        plasma on,cnd=1
+        var sft
+        sft=Shift(0,_plasma.kerf,0,0,0,0,"tool")
+        move P,tg=po1+sft,spd=_plasma.speed,accu=0,tool=0
         ```

@@ -47,7 +47,7 @@
      - 아크 ON : 플라즈마 아크를 발생시킴
      - 천공 높이(piercing height) 이동 : 아크가 안정화 되고 본격적인 천공을 시작함
      - 천공 대기(piercing delay) : 천공 완료까지 대기함
-     - 모션 신호 확인 : 장비 이동 신호(machine motion) 신호를 확인함
+     - 모션 신호 확인 : 로봇 이동 신호(machine motion) 신호를 확인함
      - 절단 높이(cutting height) 이동 : 절단 가능 높이로 이동하여 절단을 시작함
 
 
