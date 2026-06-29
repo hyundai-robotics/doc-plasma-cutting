@@ -163,26 +163,26 @@
 ### (2) 주요 제어 및 모니터링 항목 (Process Data Objects, PDO)
 EtherCAT 통신을 통해 로봇 제어기에서 다음과 같은 핵심 기능을 수행합니다.
 - 제어 신호 (Output to Plasma)
-  - Plasma Start: 절단 아크 시작 및 종료 명령을 위한 신호
-  - Hold ignition: 아크 시작 신호와 동시에 활성화 되며, preflow 상태에서 아크를 유지하기 위해 사용
-  - Pierce: 천공시작 후 대기 시간 동안 ON 상태 유지
-  - Request new process: 절단 중 ID를 변경하는 용도이나, 실제 미사용
+  - 플라즈마 시작(Plasma Start): 절단 아크 시작 및 종료 명령을 위한 신호
+  - 점화 유지(Hold ignition): 아크 시작 신호와 동시에 활성화 되며, preflow 상태에서 아크를 유지하기 위해 사용
+  - 천공(Pierce): 천공시작 후 대기 시간 동안 ON 상태 유지
+  - 프로세스 ID 변경(Request new process): 절단 중 ID를 변경하는 용도이나, 실제 미사용
 
 - 상태 피드백 (Input from Plasma)
-  - Machine motion: 천공 대기 후 모션 가능 
-  - Ready for start: 프로세스 ID 수신 후 설정 완료
-  - Error: 장비 내부 오류 알림
-  - Process ready: 프로세스 ID 입력 대기 
-  - Ohmic contact: 토치와 부재의 접촉 확인 신호로 터치 센싱 시 활용
-  - Remote power status: 절단기의 전원 입력 상태 확인
-  - arc voltage: 절단기 전압 피드백으로 높이 제어 시 활용
-  - system info: 현재 에러 코드
+  - 로봇 모션(Machine motion): 천공 대기 후 모션 가능 
+  - 작업 시작(Ready for start): 프로세스 ID 수신 후 설정 완료
+  - 에러(Error): 장비 내부 오류 알림
+  - 공정 준비(Process ready): 프로세스 ID 입력 대기 
+  - 오믹 접촉(Ohmic contact): 토치와 부재의 접촉 확인 신호로 터치 센싱 시 활용
+  - 원격 전원 상태(Remote power status): 절단기의 전원 입력 상태 확인
+  - 아크 전압(arc voltage): 절단기 전압 피드백으로 높이 제어 시 활용
+  - 시스템 정보(system info): 현재 에러 코드
 
 ### (3) 상태 확인 및 설정 (Service Data Objects, SDO)
  - 절단 조건 설정
-   - Process ID: 절단기에 설정된 현재 프로세스 ID 
-   - Condition Parameters: 전류, 가스 압력 등 각종 절단 조건 파라미터 설정
-   - Gas test: preflow, cutflow, pierce flow 등 가스 수동 출력
+   - 프로세스 ID(Process ID): 절단기에 설정된 현재 프로세스 ID 
+   - 조건 파라미터(Condition Parameters): 전류, 가스 압력 등 각종 절단 조건 파라미터 설정
+   - 가스 시험(Gas test): preflow, cutflow, pierce flow 등 가스 수동 출력
 
  - 설정 상태 확인
    - Process ID: 절단기에 설정된 현재 프로세스 ID 
@@ -213,19 +213,57 @@ EtherCAT 통신을 통해 로봇 제어기에서 다음과 같은 핵심 기능�
 
 플라즈마 절단 응용에 해당 하는 아크 용접기 타입은 범용 용접기 입니다. 아래의 절차대로 용접기 설정을 수행합니다.
 
+<br>
+
 ### (1) 용접기 선택
  
- `[F2:시스템, 5:초기화, 3:용도 설정]` 에서 아크용접을 유효로 선택하고 용접기 제조사 번호를 '9'로 입력합니다. (9:범용 용접기)
+ `[F2:시스템, 5:초기화, 3:용도 설정]` 에서 아크용접을 유효로 선택하고 용접기 제조사 번호를 '9'로 입력합니다. (9:범용 용접기)  
+ `[용접기 설정]` 버튼을 누르면 범용 용접기 설정 페이지로 연결됩니다.
 
 ![그림2.3 범용 용접기](../../_assets/gerneral_welder.png)
 
+<br>
 
 ### (2) 신호 입력
-`[용접기 설정]` 버튼을 누르면 범용 용접기의 신호 설정 페이지로 연결됩니다. FB 블럭 할당에서 선택한 블럭 번호를 기반으로 각 신호의 주소를 입력합니다.
+ 일반 용접기 조건 페이지는 용접기, 입력 신호 할당, 출력 신호 할당 탭으로 구성되어 있습니다. 아크 용접기의 설정 화면을 공유하기 때문에 기존 아크 항목과 유사한 플라즈마 절단 신호가 설정되도록 하였습니다.
 
-![그림2.5 용접기 조건](../../_assets/cnd_welder.png)
+ - 입력 신호 할당  
+ 입력 신호 할당 탭에서 `[자동 설정]` 버튼을 누릅니다. 세부 항목 중에서 Hypertherm-XPR 모델을 순차적으로 선택하고, 기존에 할당했던 FB 블럭의 시작주소를 입력합니다.
+   
+
+![그림2.4 범용 용접기](../../_assets/sig_assign_in.png)
+
+ - 출력 신호 할당
+ 출력 신호 할당 탭에서 `[자동 설정]` 버튼을 누릅니다. 세부 항목 중에서 Hypertherm-XPR 모델을 순차적으로 선택하고, 기존에 할당했던 FB 블럭의 시작주소를 입력합니다.
+
+![그림2.5 용접기 조건](../../_assets/sig_assign_out.png)
+
+<br>
+
+### (3) 신호 할당 확인
+
+기존 아크 범용 용접기의 항목과 유사한 항목에 할당 주소가 표시되며, 플라즈마 절단 모니터링 화면에서 상태를 확인할 수 있습니다.  
+FB 블럭할당에서 fb1을 선택한 경우 아래 표와 같은 주소가 자동으로 할당됩니다.
 
 
+<br>
+
+|분류|아크용접|플라즈마 절단|신호 할당|
+|:--:|:--:|:--:|:--:|
+|입력|용접기 사용 가능|원격 전원 상태(remote power status)|fb1.9|
+|입력|와이어 용착 신호|오믹 접촉(ohmic contact)|fb1.8|
+|입력|프로세스 활성화|공정 준비 완료(process ready)|fb1.5|
+|입력|통신준비 완료|시작 준비 완료(ready for start)|fb1.2|
+|입력|용접기 에러 신호|에러|fb1.4|
+|입력|로봇 모션(machine motion)|로봇 모션(machine motion)|fb1.0|
+|입력|에러 우선순위 수준-error|에러 우선순위 수준-error|fb1.10|
+|입력|에러 우선순위 수준-failure|에러 우선순위 수준-failure|fb1.11|
+|입력|용접 전류|전류|fb1.16 ~ fb1.31|
+|입력|용접 전압|전압|fb1.48 ~ fb1.63|
+|입력|용접기 에러 번호|에러 번호|fb1.8 ~ fb1.23|
+|**출력**|아크 ON|플라즈마 ON|fb1.0|
+|**출력**|점화 유지(hold ignition)|점화 유지(hold ignition)|fb1.1|
+|**출력**|천공(pierce)|천공(pierce)|fb1.2|
 [__SOURCE](2-application/2-settings/README.md)
 # 2.2 절단 조건 설정
 
@@ -235,7 +273,7 @@ EtherCAT 통신을 통해 로봇 제어기에서 다음과 같은 핵심 기능�
 ## 2.2.1 시작 조건
 `plasma on` 명령어 수행시에 절단기로 전송되는 설정값들입니다. 부재 두께를 입력하고  절단 차트에서 작업 상황에 맞는 프로세스 ID를 입력하면 기본 설정들이 표시됩니다. 표시된 값들은 절단 품질을 고려하여 가장 추천하는 설정이나 특별한 작업 상황이나 부품의 상태등에 따라 사용자가 수정할 수 있습니다.
 
-![그림2.7 시작 조건](../../_assets/start_cnd.png)
+![그림2.5 시작 조건](../../_assets/start_cnd.png)
 
 
 (1) 절단 타입  
@@ -251,7 +289,7 @@ EtherCAT 통신을 통해 로봇 제어기에서 다음과 같은 핵심 기능�
 (4) 프로세스 ID  
 두께를 입력하면 절단 차트로 부터 해당하는 프로세스 ID가 나열됩니다. 보다 자세한 절단 정보를 확인하기 위해서 `[F1: 프로세스 ID 선택]` 를 누르면 절단 차트가 팝업됩니다. 두께 기준으로 정렬된 표에서 원하는 프로세스 ID를 선택할 수 있습니다.
 
-![그림2.8 절단 차트](../../_assets/cut_chart.png)
+![그림2.6 절단 차트](../../_assets/cut_chart.png)
 
 (5) 이동 속도  
 천공(piercing)이 완료된 이후에 절단 경로를 따라 로봇을 이동 할때 입력되는 속도입니다. 해당 입력창에 입력된 값은 `plasma on` 명령어 실행 시에 `_plasma.speed` 라는 이름의 시스템 변수에 저장됩니다. 사용자는 잡 프로그램 작성시에 이 변수를 속도 파라미터에 입력합니다.
@@ -287,7 +325,7 @@ EtherCAT 통신을 통해 로봇 제어기에서 다음과 같은 핵심 기능�
 [__SOURCE](2-application/2-settings/2-motion-cnd.md)
 ## 2.2.2 모션 조건
 
-![그림2.9 모션 조건](../../_assets/motion_cnd.png)
+![그림2.7 모션 조건](../../_assets/motion_cnd.png)
 
 (1) 시작 타입  
 부재면 내에서 천공(piercing)을 하면서 시작하는 타입과 에지에서 천공없이 절단을 시작하는 타입으로 구분합니다.
@@ -316,7 +354,7 @@ EtherCAT 통신을 통해 로봇 제어기에서 다음과 같은 핵심 기능�
 [__SOURCE](2-application/2-settings/3-end-cnd.md)
 ## 2.2.3 종료 조건
 
-![그림2.10 종료 조건](../../_assets/end_cnd.png)
+![그림2.8 종료 조건](../../_assets/end_cnd.png)
 
 `plasma off` 명령어 수행시에 적용되는 설정입니다.
 
@@ -334,7 +372,7 @@ EtherCAT 통신을 통해 로봇 제어기에서 다음과 같은 핵심 기능�
 
 (1) 제어 원리 (Principle of Operation)  
 
-![그림2.11 토치거리와 전압](../../_assets/height_ctrl.png)
+![그림2.9 토치거리와 전압](../../_assets/height_ctrl.png)
 
  - 전압과 거리의 관계: 플라즈마 아크의 전압은 토치와 모재 사이의 거리가 멀어지면 높아지고, 가까워지면 낮아지는 특성을 가집니다.
  - 피드백 루프: 로봇 제어기는 하이퍼썸 전원 장치로부터 실시간 아크 전압(Actual Voltage) 데이터를 EtherCAT 통신으로 주기적으로 수신합니다.
@@ -369,7 +407,7 @@ EtherCAT 통신을 통해 로봇 제어기에서 다음과 같은 핵심 기능�
  - 절단폭(Kerf Width): 플라즈마 아크에 의해 실제 제거되는 금속의 폭입니다. 이는 노즐 사이즈, 전류량, 절단 속도 및 소재 두께에 따라 달라집니다.
  - 쉬프트 거리(Offset Distance): 절단폭의 절반(1/2 Kerf)만큼 토치를 진행 방향의 좌측 또는 우측으로 이동시킵니다. (예: 절단폭이 2.0mm인 경우, 토치 중심을 티칭 라인에서 1.0mm 바깥으로 쉬프트합니다.)
 
-![그림2.12 토치거리와 전압](../../_assets/kerf.png)
+![그림2.10 토치거리와 전압](../../_assets/kerf.png)
 
 (2) 툴 좌표계 기반 X방향 쉬프트 (TCP Shift)  
  - 로봇 제어기에서 토치의 진행 방향을 기준으로 보정 값을 적용합니다.
@@ -406,20 +444,27 @@ EtherCAT 통신을 통해 로봇 제어기에서 다음과 같은 핵심 기능�
 
 
   - _plasma.speed
-    - 용도 : 프로세스 ID 마다 설정된 절단 속도를 사용자가 쉽게 사용하도록 함
+    - 용도 : 프로세스 ID 마다 설정된 절단 속도를 사용자가 쉽게 입력하도록 함
     - 작동 : `plasma on,cnd=1` 명령어의 조건 번호에 설정된 절단 속도를 해당 시스템 변수로 가져옴
     - 사용법 : `move`문의 속도 변수에 해당 시스템 변수를 사용함 (mm/sec)
     - 사용 예제
         ```python
-        var v0
-        v0 = _plasma.speed
-
         plasma on,cnd=1
-        move P,spd=v0,accu=0,tool=0
-        # or
         move P,spd=_plasma.speed,accu=0,tool=0
         ```
 
+
+  - _plasma.kerf
+    - 용도 : 절삭폭을 고려한 로봇의 쉬프트 모션 명령을 사용자가 쉽게 편집하도록 함
+    - 작동 : `plasma on,cnd=1` 명령어의 조건 번호에 설정된 절삭폭 보정량을 해당 시스템 변수로 가져옴
+    - 사용법 : `move`문의 목표 위치 작성시 해당 시스템 변수를 사용함 (mm)
+    - 사용 예제
+        ```python
+        plasma on,cnd=1
+        var sft
+        sft=Shift(0,_plasma.kerf,0,0,0,0,"tool")
+        move P,tg=po1+sft,spd=_plasma.speed,accu=0,tool=0
+        ```
 [__SOURCE](2-application/4-programming/2-cmd.md)
 ## 2.4.2 plasma on/off 명령어
 
@@ -470,7 +515,7 @@ EtherCAT 통신을 통해 로봇 제어기에서 다음과 같은 핵심 기능�
      - 아크 ON : 플라즈마 아크를 발생시킴
      - 천공 높이(piercing height) 이동 : 아크가 안정화 되고 본격적인 천공을 시작함
      - 천공 대기(piercing delay) : 천공 완료까지 대기함
-     - 모션 신호 확인 : 장비 이동 신호(machine motion) 신호를 확인함
+     - 모션 신호 확인 : 로봇 이동 신호(machine motion) 신호를 확인함
      - 절단 높이(cutting height) 이동 : 절단 가능 높이로 이동하여 절단을 시작함
 
 
