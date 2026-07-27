@@ -10,9 +10,14 @@
 
  (3) plasma on  
  절단 위치로 이동, 플라즈마 on, 절단 이송 준비 완료
- 
+  * 참고 메뉴얼  
+  [touchsen문](https://hrbook-hrc.web.app/#/view/doc-arc-weld/ko/2_Command/13_touchsen?cont_model=${cont_model})
+
  (4) heightsen on  
  전압 피드백을 이용한 높이 제어 수행
+ * 참고 메뉴얼  
+  [높이 센싱](https://hrbook-hrc.web.app/#/view/doc-arc-weld/ko/8_Application_function/4_Height_sensing/README?cont_model=${cont_model}})  
+  [heightsen on문](https://hrbook-hrc.web.app/#/view/doc-arc-weld/ko/2_Command/9_hsenson?cont_model=${cont_model})
 
  (5) 리드인 (Lead-in)  
  제품 외곽선에서 실제 절단 라인으로 부드럽게 진입 (필요시)
@@ -25,6 +30,8 @@
 
  (8) heightsen off  
  높이 제어 종료
+  * 참고 메뉴얼  
+ [heightsen off문](https://hrbook-hrc.web.app/#/view/doc-arc-weld/ko/2_Command/10_hsensoff?cont_model=${cont_model})
 
  (9) plasma off  
   플라즈마 오프
