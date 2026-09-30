@@ -37,19 +37,87 @@ FB 블럭할당에서 fb1을 선택한 경우 아래 표와 같은 주소가 자
 
 <br>
 
-|분류|아크용접|플라즈마 절단|신호 할당|
-|:--:|:--:|:--:|:--:|
-|입력|용접기 사용 가능|원격 전원 상태(remote power status)|fb1.9|
-|입력|와이어 용착 신호|오믹 접촉(ohmic contact)|fb1.8|
-|입력|프로세스 활성화|공정 준비 완료(process ready)|fb1.5|
-|입력|통신준비 완료|시작 준비 완료(ready for start)|fb1.2|
-|입력|용접기 에러 신호|에러|fb1.4|
-|입력|로봇 모션(machine motion)|로봇 모션(machine motion)|fb1.0|
-|입력|에러 우선순위 수준-error|에러 우선순위 수준-error|fb1.10|
-|입력|에러 우선순위 수준-failure|에러 우선순위 수준-failure|fb1.11|
-|입력|용접 전류|전류|fb1.16 ~ fb1.31|
-|입력|용접 전압|전압|fb1.48 ~ fb1.63|
-|입력|용접기 에러 번호|에러 번호|fb1.8 ~ fb1.23|
-|**출력**|아크 ON|플라즈마 ON|fb1.0|
-|**출력**|점화 유지(hold ignition)|점화 유지(hold ignition)|fb1.1|
-|**출력**|천공(pierce)|천공(pierce)|fb1.2|
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center;">분류</th>
+      <th style="text-align: center;">아크용접</th>
+      <th style="text-align: center;">플라즈마 절단</th>
+      <th style="text-align: center;">신호 할당</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center" rowspan="11">입력</td>
+      <td align="center">용접기 사용 가능</td>
+      <td align="center">원격 전원 상태(remote power status)</td>
+      <td align="center">fb1.9</td>
+    </tr>
+    <tr>
+      <td align="center">와이어 용착 신호</td>
+      <td align="center">오믹 접촉(ohmic contact)</td>
+      <td align="center">fb1.8</td>
+    </tr>
+    <tr>
+      <td align="center">프로세스 활성화</td>
+      <td align="center">공정 준비 완료(process ready)</td>
+      <td align="center">fb1.5</td>
+    </tr>
+    <tr>
+      <td align="center">통신준비 완료</td>
+      <td align="center">시작 준비 완료(ready for start)</td>
+      <td align="center">fb1.2</td>
+    </tr>
+    <tr>
+      <td align="center">용접기 에러 신호</td>
+      <td align="center">에러</td>
+      <td align="center">fb1.4</td>
+    </tr>
+    <tr>
+      <td align="center">로봇 모션(machine motion)</td>
+      <td align="center">로봇 모션(machine motion)</td>
+      <td align="center">fb1.0</td>
+    </tr>
+    <tr>
+      <td align="center">에러 우선순위 수준-error</td>
+      <td align="center">에러 우선순위 수준-error</td>
+      <td align="center">fb1.10</td>
+    </tr>
+    <tr>
+      <td align="center">에러 우선순위 수준-failure</td>
+      <td align="center">에러 우선순위 수준-failure</td>
+      <td align="center">fb1.11</td>
+    </tr>
+    <tr>
+      <td align="center">용접 전류</td>
+      <td align="center">전류</td>
+      <td align="center">fb1.16 ~ fb1.31</td>
+    </tr>
+    <tr>
+      <td align="center">용접 전압</td>
+      <td align="center">전압</td>
+      <td align="center">fb1.48 ~ fb1.63</td>
+    </tr>
+    <tr>
+      <td align="center">용접기 에러 번호</td>
+      <td align="center">에러 번호</td>
+      <td align="center">fb1.8 ~ fb1.23</td>
+    </tr>
+    <tr>
+      <td align="center" rowspan="3"><strong>출력</strong></td>
+      <td align="center">아크 ON</td>
+      <td align="center">플라즈마 ON</td>
+      <td align="center">fb1.0</td>
+    </tr>
+    <tr>
+      <td align="center">점화 유지(hold ignition)</td>
+      <td align="center">점화 유지(hold ignition)</td>
+      <td align="center">fb1.1</td>
+    </tr>
+    <tr>
+      <td align="center">천공(pierce)</td>
+      <td align="center">천공(pierce)</td>
+      <td align="center">fb1.2</td>
+    </tr>
+  </tbody>
+</table>

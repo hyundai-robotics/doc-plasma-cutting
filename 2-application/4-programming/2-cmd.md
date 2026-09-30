@@ -20,7 +20,7 @@
 
         ```python  
         plasma on,cnd=1
-        move P,spd=_plasma.speed,accu=0,tool=0
+        move P,spd=_plasma[1].speed,accu=0,tool=0
         plasma off,cnd=1
         ```
     

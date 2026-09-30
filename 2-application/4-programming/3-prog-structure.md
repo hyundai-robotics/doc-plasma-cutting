@@ -61,10 +61,10 @@ move                                    # 판재 근접 위치
 touchsen, P1                            # 부재 위치 확인
 plasma on,cnd=1                         # 플라즈마 아크 출력
 heightsen on                            # 높이 제어 시작
-move P,spd=_plasma.speed,accu=0,tool=0  # 절단 시작
+move P,spd=_plasma[1].speed,accu=0,tool=0  # 절단 시작
 ...
 heightsen off                           # 높이 제어 종료
-plasma off,cnd=1                        # 플라즈마 아크 정지
+plasma off                              # 플라즈마 아크 정지
 
 move                                    # 복귀 위치
 ```

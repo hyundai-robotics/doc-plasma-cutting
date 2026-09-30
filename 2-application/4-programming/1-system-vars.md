@@ -5,7 +5,7 @@
 
 <br>
 
-  - _plasma[cnd#].process_id
+  - _plasma.process_id
     - 용도 : 플라즈마 절단기로 프로세스 ID를 전송, ID는 조건 설정 페이지에서 두께에 맞게 선택
     - 작동 : 입력된 ID 값이 이더캣 통신으로 전달되고, 설정 완료시 'ready for start' 상태가 ON 됨
     - 사용법 : 대입문의 좌변에 해당 시스템 변수를 선택하고 우변에 프로세스 ID를 입력함
@@ -47,4 +47,22 @@
         var cut_hgt=_plasma[1].cutting_height
         var sft_height=Shift(0,0,-cut_hgt,0,0,0,"tool")
         move P,tg=po_cut_srt+sft_height,spd=cut_spd*0.5mm/sec,accu=0,tool=0
+        ```
+
+  - _plasma[cnd#].torch_angle
+    - 용도 : 가우징 작업에 필요한 토치 각도를 사용자가 잡 프로그램에 쉽게 입력하도록 함
+    - 작동 : 절단 조건 번호에 설정된 가우징 토치 각도를 해당 시스템 변수로 가져옴
+    - 사용법 : 가우징 작업을 위한 토치 자세 설정 시 해당 시스템 변수를 사용함 (deg)
+    - 사용 예제
+        ```python
+        var gouging_angle=_plasma[1].torch_angle
+        ```
+
+  - _plasma[cnd#].motion_delay
+    - 용도 : 가우징 종료 시 필요한 대기 시간을 사용자가 잡 프로그램에 쉽게 입력하도록 함
+    - 작동 : 절단 조건 번호에 설정된 가우징 종료 대기 시간을 해당 시스템 변수로 가져옴
+    - 사용법 : 가우징 종료 시 `plasma off` 명령어의 대기 시간으로 해당 시스템 변수를 사용함 (sec)
+    - 사용 예제
+        ```python
+        plasma off,wait=_plasma[1].motion_delay
         ```

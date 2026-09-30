@@ -43,7 +43,7 @@
 (12) 천공 지연 (pierce delay)  
 천공 위치에서 천공이 완료될때 까지 대기 하는 시간입니다. 완료 후에 모션 가능 상태가 됩니다.
 
-(13) 토치 보호 (torch protection)
+(13) 토치 보호 (torch protection)  
 절단 전류의 불안정으로 인한 전극 고장을 감지하여 토치의 손상을 예방하는 기능입니다.
 
 (14) 전류하강 에러 보호 (ramp-down error protection)  
