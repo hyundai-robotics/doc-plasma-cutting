@@ -1,33 +1,33 @@
-﻿# 1.3 시스템 구성
+# 1.3 System Configuration
 
-하이퍼썸(Hypertherm) 플라즈마 절단 시스템과 로봇 제어기를 결합한 전체 시스템 구성은 정밀한 절단 품질과 자동화를 위해 다음과 같이 유기적으로 연결됩니다.
+The Hypertherm plasma cutting system and robot controller are integrated as shown below to provide precise cutting quality and automation.
 
-![그림1.1 시스템 구성](../_assets/configure.png)
+![Figure 1.1 System configuration](../_assets/configure.png)
 
 <br>
 
-### (1) 하이퍼썸 플라즈마 전원 장치 (Plasma Power Supply)  
-시스템의 핵심으로, 고압의 전력을 공급하여 플라즈마 아크를 생성합니다.
-- 기능: 전류 제어, 가스 유량 조절, 소모품 수명 모니터링 등을 수행합니다. (예: XPR  170)
-- 통신: 로봇 제어기와 인터페이스(이더캣)로 연결되어 실시간 절단 파라미터를 주고 받습니다.  
+### (1) Hypertherm Plasma Power Supply  
+The core of the system, this unit supplies high-voltage power to generate the plasma arc.
+- Functions: Controls current and gas flow and monitors consumable life (for example, XPR 170).
+- Communication: Connects to the robot controller through EtherCAT to exchange cutting parameters in real time.  
 
-### (2) 로봇 시스템 및 제어기 (Robot & Controller)  
-토치의 정밀한 움직임을 담당하는 구동부입니다.
-- 로봇 본체: 토치와 케이블 하중을 고려하여 10kg 이상의 6축 다관절 로봇을 사용하여 복잡한 3D 형상이나 경사 절단을 수행합니다.
-- 로봇 제어기:
-    - 하이퍼썸 전원 장치에 '절단 시작/종료' 신호를 보내고, 이동 속도와 경로를 계산하여 토치의 위치를 정밀하게 제어합니다.
-    - 절단 중 모재의 휘어짐이나 변형에 대응하여 토치와 모재 사이의 간격(전압 기준)을 일정하게 유지합니다. 로봇 제어기와 연동되어 실시간으로 Z축 높이를 보정함으로써 균일한 절단 폭을 보장합니다.
+### (2) Robot System and Controller  
+The drive system responsible for precise torch movement.
+- Robot: A six-axis articulated robot with a payload of at least 10 kg is used to accommodate the torch and cable load and perform complex 3D or bevel cuts.
+- Robot controller:
+    - Sends cutting start/stop signals to the Hypertherm power supply and precisely controls torch position by calculating the travel speed and path.
+    - Maintains a constant voltage-based gap between the torch and workpiece to compensate for workpiece warpage or deformation during cutting. Real-time Z-axis height compensation helps maintain a uniform kerf width.
 
-### (3) 가스 콘솔 (Gas Console)   
-절단 및 보호용 가스(산소, 질소, 공기 등)의 압력과 혼합비를 정밀하게 제어합니다.
-  - 기능: 재질과 두께에 최적화된 가스를 공급하여 절단면의 산화 방지 및 품질을 결정합니다.
-  - GCC(Gas Connect Console) : 가스 유량, 압력, 전환 등을 담당하여 플라즈마와 쉴드 가스를 공급하고 흐름을 제어합니다.
+### (3) Gas Console  
+Precisely controls the pressure and mixture ratio of cutting and shielding gases such as oxygen, nitrogen, and air.
+  - Function: Supplies gas optimized for the material and thickness, helping prevent oxidation and determine cut quality.
+  - GCC (Gas Connect Console): Supplies and controls plasma and shield gases, including gas flow, pressure, and switching.
 
-### (4) 토치 및 리드선 세트 (Torch & Lead Assembly)  
-로봇 팔 끝단에 장착되어 실제 절단이 이루어지는 부분입니다.
-  - 기능: 냉각수와 가스, 전력을 전원 장치로부터 전달받아 플라즈마를 방출합니다.
-  - TCC(Torch Connect Console) : 토치 관련 신호 및 전력을 전달하여 플라즈마 아크의 발생 및 제어합니다.
-  - 충돌 방지 장치(Collision Sensor): 토치가 모재나 장애물에 부딪혔을 때 로봇을 즉시 정지시켜 장비를 보호합니다.
+### (4) Torch and Lead Assembly  
+Mounted at the end of the robot arm, this assembly performs the actual cutting.
+  - Function: Receives coolant, gas, and power from the power supply and generates plasma.
+  - TCC (Torch Connect Console): Transfers torch-related signals and power to generate and control the plasma arc.
+  - Collision sensor: Immediately stops the robot if the torch contacts the workpiece or an obstacle, protecting the equipment.
 
-### (5) 접지 및 워크 리드 (Work Lead)  
-플라즈마 전원 장치로 부터 회로를 완성하기 위해 모재(절단물)에 연결하는 케이블입니다. 안정적인 아크 형성을 위해 확실한 접지가 필수적입니다.
+### (5) Ground and Work Lead  
+A cable connected to the workpiece to complete the circuit from the plasma power supply. Reliable grounding is essential for stable arc generation.

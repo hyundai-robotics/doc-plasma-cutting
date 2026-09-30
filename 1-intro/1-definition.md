@@ -1,45 +1,44 @@
-﻿# 1.1 플라즈마 절단
+# 1.1 Plasma Cutting
 
-플라즈마 절단(Plasma Cutting)은 고온의 플라즈마 아크를 이용하여 금속을 빠르고 정밀하게 절단하는 응용입니다. 본 시스템은 현대로보틱스 기반 로봇 자동화 기술과 하이퍼썸(Hypertherm)사의 플라즈마 절단장비를 결합하여, 고품질 절단과 생산성 향상을 구현합니다.
+Plasma cutting uses a high-temperature plasma arc to cut metal quickly and precisely. This system combines HD Hyundai Robotics robot automation technology with Hypertherm plasma cutting equipment to provide high-quality cutting and improved productivity.
 
-<Br>
+<br>
 
-### (1) 플라즈마 절단 원리  
-플라즈마 절단은 압축된 가스를 전기적으로 이온화하여 초고온의 플라즈마 상태로 만든 후, 이를 금속 표면에 분사하여 절단하는 방식입니다. 이 과정에서 발생하는 고온의 아크(Arc)는 금속을 순간적으로 용융시키고, 고속 가스가 용융 금속을 제거하면서 절단이 이루어집니다.
+### (1) Plasma Cutting Principle  
+In plasma cutting, compressed gas is electrically ionized into an extremely hot plasma and then directed onto the metal surface. The resulting high-temperature arc instantly melts the metal, while high-velocity gas removes the molten material to produce the cut.
 
-<Br>
+<br>
 
-### (2) 시스템 구성  
-전체 시스템은 현대로보틱스의 로봇시스템과 플라즈마 절단 장비로 구성됩니다. 자세한 설명은 1.3절 시스템 구성에서 기술됩니다.
-  - 로봇 및 제어시스템 (현대로보틱스): 정밀한 경로 제어 및 반복 작업 수행합니다.
-  - 플라즈마 절단 장비 (하이퍼썸): 안정적인 아크 생성 및 절단 기능 제공합니다.
-  - 통신: 이더캣 (EtherCAT) 주기(PDO)/비주기(SDO)을 지원합니다.
+### (2) System Configuration  
+The overall system consists of an HD Hyundai Robotics robot system and plasma cutting equipment. See Section 1.3, System Configuration, for details.
+  - Robot and control system (HD Hyundai Robotics): Provides precise path control and repetitive operation.
+  - Plasma cutting equipment (Hypertherm): Provides stable arc generation and cutting functions.
+  - Communication: Supports cyclic (PDO) and acyclic (SDO) EtherCAT communication.
 
-<Br>
+<br>
 
-### (3) 플라즈마 가스 / 쉴드 가스의 역할  
-- 플라즈마 가스 (Plasma Gas)  
-    전기적 아크에 의해 이온화되어 실제 절단을 수행하는 고온의 플라즈마를 형성합니다.  
-    절단 속도, 절단력 및 절단면 품질에 직접적인 영향을 줍니다.  
-- 쉴드 가스 (Shield Gas)  
-    플라즈마 아크 외부를 감싸며 절단부를 보호하는 역할을 합니다.  
-    외부 공기 유입을 차단하고, 절단면 산화 및 슬래그 발생을 줄이는 데 기여합니다.
+### (3) Roles of Plasma Gas and Shield Gas  
+- Plasma Gas  
+    The gas is ionized by an electric arc to form the high-temperature plasma that performs the cutting.  
+    It directly affects cutting speed, cutting force, and cut-surface quality.  
+- Shield Gas  
+    The shield gas surrounds the plasma arc and protects the cutting area.  
+    It blocks ambient air and helps reduce oxidation and slag formation on the cut surface.
 
-<Br>
+<br>
 
-### (4) 주요 사양  
+### (4) Main Specifications  
 
-|항목|사양| 비고|
+|Item|Specification|Remarks|
 |:--:|:--:|:--:|
-|작업 종류 |  절단, 마킹, 가우징 ||
-|절단 속도 |  mm/sec |두께에 따라 결정 (~100mm/s) |
-| 경로 정밀도 |+-1.0mm| | 
-| 추종 성능 |1.5mm/sec| 절단속도 35mm/s| 
-| 절단면 품질 | 하이퍼썸 평가 통과| 제진제어 정밀 튜닝 필요 | 
-| 가스 | 산소, 공기 | |
-| 소재 | 연강 (mild steel) | |
-| 두께 | ~ 500mm | |
-| 전류 | 최대 300A | 절단기 모델에 따라 결정 |
-| 하이퍼썸 지원 모델 | XPR 170, XPR 300 | |
-| 통신 | 이더캣 (EtherCAT) | |
-
+|Process type|Cutting, marking, gouging||
+|Cutting speed|mm/sec|Determined by thickness (up to approximately 100 mm/s)|
+|Path accuracy|±1.0 mm||
+|Tracking performance|1.5 mm/sec|At a cutting speed of 35 mm/s|
+|Cut-surface quality|Passes Hypertherm evaluation|Requires precision tuning of vibration suppression control|
+|Gas|Oxygen, air||
+|Material|Mild steel||
+|Thickness|Up to 500 mm||
+|Current|Up to 300 A|Depends on the plasma power supply model|
+|Supported Hypertherm models|XPR 170, XPR 300||
+|Communication|EtherCAT||

@@ -1,35 +1,32 @@
-﻿# 4.1 가스 수동 출력
+# 4.1 Manual Gas Output
 
-
-
-본 기능은 실제 절단 공정을 시작하기 전, 가스 공급 라인의 상태를 점검하거나 절단 조건에 맞는 가스 압력 및 유량을 확인하기 위해 사용합니다. 로봇 제어기의 인터페이스 또는 하이퍼썸 가스 콘솔을 통해 수동으로 각 단계의 가스를 분출할 수 있습니다.
+Use this function before starting an actual cutting operation to check the gas supply lines and verify that gas pressure and flow match the cutting conditions. Each gas stage can be activated manually through the robot controller interface or Hypertherm gas console.
 
 <br>
 
-![그림4.1 가스 수동 출력 버튼](../_assets/test_button.png)
+![Figure 4.1 Manual gas output buttons](../_assets/test_button.png)
 
 <br>
 
-(1) 프리플로우 (Pre-flow) 수동 출력  
-  - 정의: 플라즈마 아크가 발생하기 직전, 토치 내부의 공기를 밀어내고 안정적인 점화를 위해 공급되는 예비 가스 흐름입니다.  
-  - 사용 목적: 절단 시작 전 가스 라인 내의 불순물이나 수분을 제거(Purge)할 때 사용합니다.  초기 점화 가스(예: 질소 또는 공기)의 압력이 설정치에 도달하는지 확인합니다.  
-  - 매뉴얼 버튼 조작: 'Pre-flow Test' 버튼을 ON으로 유지하면 설정된 시간 동안 가스가 분출됩니다.
+(1) Manual Pre-flow Output  
+  - Definition: A preliminary gas flow supplied immediately before the plasma arc starts. It purges air from inside the torch and helps ensure stable ignition.  
+  - Purpose: Used to purge contaminants or moisture from the gas line before cutting. It also verifies that the pressure of the initial ignition gas, such as nitrogen or air, reaches the set value.  
+  - Button operation: Turn the `Pre-flow Test` button ON to discharge gas.
 
-(2) 컷플로우 (Cut-flow) 수동 출력    
-  - 정의: 실제 절단이 진행되는 동안 고에너지 플라즈마 아크를 형성하고 용융된 금속을 불어내는 주 절단 가스 흐름입니다.  
-  - 사용 목적: 최종 절단 품질을 결정하는 주 가스의 압력과 유량이 설정된 절단 도표(Cut Chart)와 일치하는지 확인합니다. 장시간 절단 시 가스 공급 장치(탱크 등)의 유량 공급 능력을 테스트합니다.  
-  - 매뉴얼 버튼 조작: 'Cut-flow Test' 버튼을 ON으로 유지하면 설정된 시간 동안 가스가 분출됩니다.
+(2) Manual Cut-flow Output  
+  - Definition: The main cutting-gas flow that forms the high-energy plasma arc and blows away molten metal during cutting.  
+  - Purpose: Verifies that the pressure and flow of the main gas, which determines final cut quality, match the cut chart. It can also test the flow capacity of the gas supply equipment, such as a tank, for long cutting operations.  
+  - Button operation: Turn the `Cut-flow Test` button ON to discharge gas.
 
-(3) 피어스플로우 (Pierce-flow) 수동 출력  
-  - 정의: 모재에 구멍을 뚫는(피어싱) 순간, 토치의 소모품을 보호하고 용융 금속의 비산을 제어하기 위해 공급되는 가스 흐름입니다.  
-  - 사용 목적: 두꺼운 판재 절단 시 피어싱 압력이 충분한지 사전에 점검합니다.  피어싱 단계에서 가스 압력 급변으로 인한 소모품 손상 여부를 확인합니다.  
-  - 매뉴얼 버튼 조작: 'Pierce Test' 버튼을 ON으로 유지하면 피어싱을 수행합니다.
+(3) Manual Pierce-flow Output  
+  - Definition: Gas supplied at the moment the workpiece is pierced to protect torch consumables and control molten-metal spatter.  
+  - Purpose: Checks in advance whether sufficient piercing pressure is available when cutting thick plate. It also helps identify possible consumable damage caused by sudden gas-pressure changes during piercing.  
+  - Button operation: Turn the `Pierce Test` button ON to output pierce-flow gas.
 
 <br>
 
-{% hint style="info" %}  
-    - 각 버튼은 토글 방식입니다. 버튼을 누르면 on/off 상태가 지속됩니다.  
-    - 3개의 수동 출력 버튼은 중복 입력이 불가합니다.  
-    - 선택 후 버튼창에 플라즈마 압력(A,B)과 쉴드 압력이(S) 표시됩니다. (단위: psi)
-
+{% hint style="info" %}
+- Each button operates as a toggle. Its ON/OFF state is maintained after it is pressed.
+- The three manual output buttons cannot be enabled simultaneously.
+- After a test is selected, plasma pressures A and B and shield pressure S are displayed in the button area (unit: psi).
 {% endhint %}

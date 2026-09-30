@@ -1,1 +1,1 @@
-﻿# ${cont_model} 제어기 기능설명서 - 플라즈마 절단
+# ${cont_model} Controller Function Manual - Plasma Cutting

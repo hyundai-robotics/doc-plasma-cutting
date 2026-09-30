@@ -1,51 +1,49 @@
-﻿## 2.2.1 시작 조건
-`plasma on` 명령어 수행시에 절단기로 전송되는 설정값들입니다. 부재 두께를 입력하고  절단 차트에서 작업 상황에 맞는 프로세스 ID를 입력하면 기본 설정들이 표시됩니다. 표시된 값들은 절단 품질을 고려하여 가장 추천하는 설정이나 특별한 작업 상황이나 부품의 상태등에 따라 사용자가 수정할 수 있습니다.
+## 2.2.1 Start Conditions
 
-![그림2.6 시작 조건](../../_assets/start_cnd.png)
+These settings are sent to the plasma cutting system when the `plasma on` command is executed. Enter the workpiece thickness and select the process ID appropriate for the operation from the cut chart to display the default settings. The displayed values are the recommended settings for cutting quality, but they may be adjusted for special operating conditions or workpiece conditions.
 
+![Figure 2.6 Start conditions](../../_assets/start_cnd.png)
 
-(1) 절단 타입  
-기본적으로 절단 기능을 가장 많이 사용하나 가우징과 마킹 기능도 제공합니다.
-    
+(1) Process Type  
+Cutting is the most commonly used process, but gouging and marking are also supported.
 
-(2) 소재  
-현재는 연강(mild steel)만 제공하고 있습니다.
+(2) Material  
+Currently, only mild steel is supported.
 
-(3) 두께  
-절단 부재의 두께를 입력합니다.
+(3) Thickness  
+Enter the thickness of the workpiece.
 
-(4) 프로세스 ID  
-두께를 입력하면 절단 차트로 부터 해당하는 프로세스 ID가 나열됩니다. 보다 자세한 절단 정보를 확인하기 위해서 `[F1: 프로세스 ID 선택]` 를 누르면 절단 차트가 팝업됩니다. 두께 기준으로 정렬된 표에서 원하는 프로세스 ID를 선택할 수 있습니다.
+(4) Process ID  
+After entering the thickness, the applicable process IDs from the cut chart are listed. To view detailed cutting information, press `[F1: Select Process ID]` to open the cut chart. Select the desired process ID from the table sorted by thickness.
 
-![그림2.7 절단 차트](../../_assets/cut_chart.png)
+![Figure 2.7 Cut chart](../../_assets/cut_chart.png)
 
-(5) 이동 속도  
-천공(piercing)이 완료된 이후에 절단 경로를 따라 로봇을 이동 할때 입력되는 속도입니다. 해당 입력창에 입력된 값은 `plasma on` 명령어 실행 시에 `_plasma.speed` 라는 이름의 시스템 변수에 저장됩니다. 사용자는 잡 프로그램 작성시에 이 변수를 속도 파라미터에 입력합니다.
+(5) Travel Speed  
+The speed at which the robot follows the cutting path after piercing is complete. When the `plasma on` command is executed, the value entered here is stored in the `_plasma[cnd#].speed` system variable. Use this variable as the speed parameter in the job program.
 
-(6) 플라즈마/쉴드  
-플라즈마 아크와 쉴드를 위한 가스 종류가 선택됩니다. 연강 절단인 경우에 산소-공기, 공기-공기가 선택되면 해당 항목은 수정이 불가합니다.
+(6) Plasma / Shield  
+Selects the gases used for the plasma arc and shielding. When oxygen-air or air-air is selected for mild-steel cutting, this item cannot be edited.
 
-(7) 전류  
-절단시 적용되는 전류값입니다. 하이퍼썸 절단기 사양에 따라 최고 전류가 제한됩니다. (ex. XPR300 : max 300A)
+(7) Current  
+The current applied during cutting. The maximum current is limited by the Hypertherm plasma cutting system specifications (for example, XPR300: max. 300 A).
 
-(8) 전압  
-절단시 적용되는 전압값입니다. 높이 제어시에 이 값이 유지 되도록 부재와 토치사이의 간격을 유지합니다.
+(8) Voltage  
+The voltage applied during cutting. Height control maintains the distance between the torch and workpiece so that this voltage remains constant.
 
-(9) 플라즈마 유압 (plasma flow)  
-플라즈마 가스의 유압을 설정합니다.
+(9) Plasma Flow  
+Sets the plasma gas pressure.
 
-(10) 쉴드 유압  (shield flow)    
-쉴드 가스의 유압을 설정합니다.
+(10) Shield Flow  
+Sets the shield gas pressure.
 
-(11) 천공 유압 (pierce flow)    
-천공시 유압을 설정합니다.
+(11) Pierce Flow  
+Sets the gas pressure used during piercing.
 
-(12) 천공 지연 (pierce delay)  
-천공 위치에서 천공이 완료될때 까지 대기 하는 시간입니다. 완료 후에 모션 가능 상태가 됩니다.
+(12) Pierce Delay  
+The time to wait at the piercing position until piercing is complete. Robot motion is enabled after this time elapses.
 
-(13) 토치 보호 (torch protection)  
-절단 전류의 불안정으로 인한 전극 고장을 감지하여 토치의 손상을 예방하는 기능입니다.
+(13) Torch Protection  
+Detects electrode failures caused by unstable cutting current to help prevent torch damage.
 
-(14) 전류하강 에러 보호 (ramp-down error protection)  
-절단 종료를 감지하여 전류와 가스 공급을 점차적으로 줄여서 전극을 보호하고 소모품의 수명을 늘려주는 기능입니다.
-
+(14) Ramp-down Error Protection  
+Detects the end of cutting and gradually reduces current and gas supply to protect the electrode and extend consumable life.

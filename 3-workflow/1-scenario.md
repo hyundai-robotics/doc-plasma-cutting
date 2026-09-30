@@ -1,27 +1,24 @@
-﻿# 3.1 설정 순서
+# 3.1 Setup Sequence
 
-절단작업은 통신 개통, 아크 범용 용접기 선택, 조건 편집, 프로그램 작성 등의 순서로 진행합니다. 초기 설정 시에만 필요한 설정을 제외하면, 이후부터는  조건 편집과 프로그램 작성만으로 작업이 가능합니다.  
+The cutting operation is prepared in the following order: establish communication, select the General Arc Welder, edit conditions, and create the program. After the initial settings are complete, subsequent operations require only condition editing and program creation.
 
-플라즈마 절단 작업에서 특별히 주의해야 할 부분은 프로세스 아이디의(process ID) 선택입니다. 플라즈마 절단기와 로봇제어기는 재질, 두께, 품질 등에 맞는 절단 상황별 절단 차트를(cut chart) 공유하고 있습니다. 사용자는 작업 환경에 따라 해당 프로세스 아이디를 선택하여야 합니다. 본 절단 기능은 부재의 종류를 연강(mild steel)로 한정하고 있으므로 두께 기준으로 절단 차트를 분류하여 절단 조건을제공하고 있습니다. 절단 부재 두께마다 나열된 하나 또는 소수의 프로세스 ID 중 선택하시면 됩니다. 선택 후에는 전류, 전압, 속도 등 작업 조건이 자동으로 표시됩니다. 일부 조건에 대해서는 사용자가 기존 절단 차트 정보를 수정할 수 있고 `plasma on` 명령어 수행시 절단기로 전송되어 반영됩니다. 프로세스 아이디가 동일한 경우에는 전송과정을(_plasma.process_ID) 생략할 수 있으나, 절단기에 설정된 ID와 `plasma on` 시에 절단 조건으로 전송되는 ID가(조건번호 편집창의 ID) 다르면 ID 불일치 에러로 처리됩니다.
-
-
+Special care must be taken when selecting the process ID. The plasma cutting system and robot controller share a cut chart that contains cutting conditions for different materials, thicknesses, and quality requirements. Select the appropriate process ID for the work environment. Because this cutting function is limited to mild steel, cutting conditions are classified by workpiece thickness. Select one of the process IDs listed for the workpiece thickness. After an ID is selected, operating conditions such as current, voltage, and speed are displayed automatically. Some values in the cut chart can be edited by the user and are sent to the plasma cutting system when the `plasma on` command is executed. If the same process ID is already set, sending `_plasma.process_id` may be omitted. However, if the ID set in the plasma cutting system differs from the ID of the condition specified by `plasma on`, a process ID mismatch error occurs.
 
 <br>
 
-| 순서|  내용 | 비고|
+|Step|Description|Remarks|
 |:--:|:--:|:--:|
-| 1|  이더캣 통신 설정 | 산업용 통신 설정 참고|
-| 2|  아크 용접기 선택  <br> (터치센싱 설정용) | 아크 용접기 설정 참고|
-| 3|  Accuracy 설정 | 레벨 0 : 툴 끝위치 0mm/ 자세 0deg  <br> (부재-토치 거리, 수 mm 이내 고려)|
-| 4|  플라즈마 절단 응용 조건 설정 | 부재 두께 입력 |
-| 5|  두께에 맞는 프로세스 ID 선택 | ID 선택시 디폴트 조건 설정됨 <br> 특정항목 제외, 수정 가능|
-| 6|  티칭 및 작업 프로그램 작성 <br> - _plasma.process_id <br> - touchsen <br> - plasma on  <br> - heightsen <br>  - move <br> - plasma off | '2.3 로봇 프로그래밍' 참고|
-| 7|  작업 버튼 on | 작업 중 on 상태 유지 |
-| 8|  자동 운전 | 절단 작업 수행 |
-| 9|  상태 모니터링  | 중요 데이터의 실시간 갱신|
-| 10|  작업 종료  | 절단 품질 확인|
-
+|1|Configure EtherCAT communication|Refer to the Industrial Communication settings|
+|2|Select the arc welder<br>(for touch-sensing setup)|Refer to Arc Welder Settings|
+|3|Set Accuracy|Level 0: tool-end position 0 mm / orientation 0 deg<br>(consider the workpiece-to-torch distance of several millimeters or less)|
+|4|Configure plasma cutting application conditions|Enter the workpiece thickness|
+|5|Select the process ID for the thickness|Default conditions are set when an ID is selected<br>All but certain items can be edited|
+|6|Teach and create the job program<br>- `_plasma.process_id`<br>- `touchsen`<br>- `plasma on`<br>- `heightsen`<br>- `move`<br>- `plasma off`|Refer to Section 2.4, Robot Programming|
+|7|Turn the Work button ON|Keep it ON during operation|
+|8|Start automatic operation|Perform cutting|
+|9|Monitor status|Important data is updated in real time|
+|10|Complete the operation|Check cutting quality|
 
 <br>
 
-![그림3.1 절단기-제어기 간 신호 입출력 및 동작 시퀀스](../_assets/interaction.png)
+![Figure 3.1 Signal I/O and operation sequence between the plasma cutting system and controller](../_assets/interaction.png)

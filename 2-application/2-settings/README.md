@@ -1,3 +1,3 @@
-﻿# 2.2 절단 조건 설정
+# 2.2 Cutting Condition Settings
 
-`plasma on cnd=#` 명령어에서 입력한 조건번호에 해당하는 설정값들을 편집합니다. 조건번호를 추가할 때마다 'cnd_#' 의 형식으로 조건 이름이 부여됩니다. 각 조건번호는 시작조건, 모션조건, 종료조건으로 구성되어 있습니다.
+Edit the settings associated with the condition number specified by the `plasma on,cnd=#` command. Each added condition is named in the `cnd_#` format. Each condition number contains start, motion, and end conditions.

@@ -1,715 +1,864 @@
-﻿
 [__SOURCE](README.md)
-# ${cont_model} 제어기 기능설명서 - 플라즈마 절단
+# ${cont_model} Controller Function Manual - Plasma Cutting
 
 [__SOURCE](0-about-this-manual/precautions.md)
-# 사전 주의사항
+# Safety Precautions
 
-{% include file="ko/precautions.md" %}
+{% include file="en/precautions.md" %}
 
 [__SOURCE](1-intro/README.md)
-# 1. 개요
+# 1. Overview
 
-플라즈마 절단의 기본 개념과 현대 로보틱스의 플라즈마 절단 시스템 구성도를 설명합니다.
+This chapter explains the basic concepts of plasma cutting and the configuration of the HD Hyundai Robotics plasma cutting system.
+
 [__SOURCE](1-intro/1-definition.md)
-# 1.1 플라즈마 절단
+# 1.1 Plasma Cutting
 
-플라즈마 절단(Plasma Cutting)은 고온의 플라즈마 아크를 이용하여 금속을 빠르고 정밀하게 절단하는 응용입니다. 본 시스템은 현대로보틱스 기반 로봇 자동화 기술과 하이퍼썸(Hypertherm)사의 플라즈마 절단장비를 결합하여, 고품질 절단과 생산성 향상을 구현합니다.
+Plasma cutting uses a high-temperature plasma arc to cut metal quickly and precisely. This system combines HD Hyundai Robotics robot automation technology with Hypertherm plasma cutting equipment to provide high-quality cutting and improved productivity.
 
-<Br>
+<br>
 
-### (1) 플라즈마 절단 원리  
-플라즈마 절단은 압축된 가스를 전기적으로 이온화하여 초고온의 플라즈마 상태로 만든 후, 이를 금속 표면에 분사하여 절단하는 방식입니다. 이 과정에서 발생하는 고온의 아크(Arc)는 금속을 순간적으로 용융시키고, 고속 가스가 용융 금속을 제거하면서 절단이 이루어집니다.
+### (1) Plasma Cutting Principle  
+In plasma cutting, compressed gas is electrically ionized into an extremely hot plasma and then directed onto the metal surface. The resulting high-temperature arc instantly melts the metal, while high-velocity gas removes the molten material to produce the cut.
 
-<Br>
+<br>
 
-### (2) 시스템 구성  
-전체 시스템은 현대로보틱스의 로봇시스템과 플라즈마 절단 장비로 구성됩니다. 자세한 설명은 1.3절 시스템 구성에서 기술됩니다.
-  - 로봇 및 제어시스템 (현대로보틱스): 정밀한 경로 제어 및 반복 작업 수행합니다.
-  - 플라즈마 절단 장비 (하이퍼썸): 안정적인 아크 생성 및 절단 기능 제공합니다.
-  - 통신: 이더캣 (EtherCAT) 주기(PDO)/비주기(SDO)을 지원합니다.
+### (2) System Configuration  
+The overall system consists of an HD Hyundai Robotics robot system and plasma cutting equipment. See Section 1.3, System Configuration, for details.
+  - Robot and control system (HD Hyundai Robotics): Provides precise path control and repetitive operation.
+  - Plasma cutting equipment (Hypertherm): Provides stable arc generation and cutting functions.
+  - Communication: Supports cyclic (PDO) and acyclic (SDO) EtherCAT communication.
 
-<Br>
+<br>
 
-### (3) 플라즈마 가스 / 쉴드 가스의 역할  
-- 플라즈마 가스 (Plasma Gas)  
-    전기적 아크에 의해 이온화되어 실제 절단을 수행하는 고온의 플라즈마를 형성합니다.  
-    절단 속도, 절단력 및 절단면 품질에 직접적인 영향을 줍니다.  
-- 쉴드 가스 (Shield Gas)  
-    플라즈마 아크 외부를 감싸며 절단부를 보호하는 역할을 합니다.  
-    외부 공기 유입을 차단하고, 절단면 산화 및 슬래그 발생을 줄이는 데 기여합니다.
+### (3) Roles of Plasma Gas and Shield Gas  
+- Plasma Gas  
+    The gas is ionized by an electric arc to form the high-temperature plasma that performs the cutting.  
+    It directly affects cutting speed, cutting force, and cut-surface quality.  
+- Shield Gas  
+    The shield gas surrounds the plasma arc and protects the cutting area.  
+    It blocks ambient air and helps reduce oxidation and slag formation on the cut surface.
 
-<Br>
+<br>
 
-### (4) 주요 사양  
+### (4) Main Specifications  
 
-|항목|사양| 비고|
+|Item|Specification|Remarks|
 |:--:|:--:|:--:|
-|절단 속도 |  mm/sec |두께에 따라 결정 (~100mm/s) |
-| 경로 정밀도 |+-1.0mm| | 
-| 추종 성능 |1.5mm/sec| 절단속도 35mm/s| 
-| 절단면 품질 | 하이퍼썸 평가 통과|  | 
-| 가스 | 산소, 공기 | |
-| 소재 | 연강 (mild steel) | |
-| 두께 | ~ 500mm | |
-| 전류 | 최대 300A | 절단기 모델에 따라 결정 |
-| 하이퍼썸 지원 모델 | XPR 170, XPR 300 | |
-| 통신 | 이더캣 (EtherCAT) | |
-
+|Process type|Cutting, marking, gouging||
+|Cutting speed|mm/sec|Determined by thickness (up to approximately 100 mm/s)|
+|Path accuracy|±1.0 mm||
+|Tracking performance|1.5 mm/sec|At a cutting speed of 35 mm/s|
+|Cut-surface quality|Passes Hypertherm evaluation|Requires precision tuning of vibration suppression control|
+|Gas|Oxygen, air||
+|Material|Mild steel||
+|Thickness|Up to 500 mm||
+|Current|Up to 300 A|Depends on the plasma power supply model|
+|Supported Hypertherm models|XPR 170, XPR 300||
+|Communication|EtherCAT||
 
 [__SOURCE](1-intro/2-classification.md)
-# 1.2 절단 분류
+# 1.2 Cutting Classifications
 
+### (1) Classification by Gas Type
 
-
-### (1) 가스 종류에 따른 분류
-
-플라즈마 절단에서는 플라즈마 가스(Plasma Gas)와 쉴드 가스(Shield Gas)의 조합이 절단 품질, 속도 및 소모품 수명에 큰 영향을 미칩니다. 본 시스템에서는 주로 산소-공기(O₂-Air) 및 공기-공기(Air-Air) 조합을 사용합니다. 산소-공기 조합은 탄소강 절단에 가장 많이 사용되고, 공기-공기는 범용성과 경제성이 뛰어납니다.
+In plasma cutting, the combination of plasma gas and shield gas has a significant effect on cutting quality, speed, and consumable life. This system primarily uses oxygen-air (O₂-Air) and air-air combinations. Oxygen-air is most commonly used for carbon steel, while air-air provides excellent versatility and economy.
 
 <br>
 
-|비교|산소-공기 | 공기-공기|
-|:--: |:--: |:--: |
-|장점 | 산소/금속 산화 반응으로 절단 속도 증가 <br> 절단면 품질 우수, 슬래그 감소 <br> 후처리 작업 최소화 가능 | 운용 비용 절감 <br> 별도의 가스 없이 압축 공기만으로 사용 가능 <br> 설비 구성 단순 <br> 다양한 소재에 적용 가능 (탄소강, 스테인리스, 알루미늄) |
-| 단점 | 산화 반응으로 인해 절단면 산화층 발생 <br> 전극 및 노즐 등 소모품 마모가 비교적 빠름| 산소 플라즈마 대비 절단 품질 낮음 <Br> 절단면이 다소 거칠고 슬래그 발생 가능 <br> 두꺼운 소재 절단 시 성능 제한|
-|적용분야 | 탄소강(SS400 등) <br> 중판 및 구조물 절단 <br> 생산성 중심 공정 | 일반 가공 작업 <br> 유지비 절감이 중요한 현장 <br> 얇은 판재 절단 |
-
-
-<br>
-
-### (2) 부재 두께에 따른 분류
-
-플라즈마 절단은 대상 부재의 두께에 따라 절단 조건 및 작업 방법이 달라지며, 이에 따라 다음과 같이 구분할 수 있습니다. 본 기능에서 용접 조건의 선택은 두께에 따라 결정됩니다.
-
-
-|비교| 박판 절단 | 중판 절단| 후판 절단|
-|:--: |:--: |:--: |:--: |
-|두께 | 약 1 ~ 6mm | 약 6 ~ 25mm | 25mm 이상|
-| 특성 | 고속 절단 가능, 고생산성 <br> 낮은 전류, 빠른 절단 속도 적용 <br> 열 영향이 크므로 변형 최소화가 중요 | 절단 속도와 품질의 균형이 중요한 영역 <br> 산업 현장에서 가장 많이 사용 <br> | 높은 전류와 충분한 가스 유량 필요 <br> 천공 과정이 품질에 큰 영향 (스패터, 슬래그) <br> Piercing 시간 및 토치 높이 제어 중요|
-
-
+|Comparison|Oxygen-Air|Air-Air|
+|:--:|:--:|:--:|
+|Advantages|Higher cutting speed through the oxygen/metal oxidation reaction<br>Excellent cut-surface quality and reduced slag<br>Can minimize post-processing|Lower operating cost<br>Uses only compressed air without a separate gas supply<br>Simple equipment configuration<br>Applicable to various materials (carbon steel, stainless steel, and aluminum)|
+|Disadvantages|The oxidation reaction creates an oxide layer on the cut surface<br>Relatively rapid wear of consumables such as electrodes and nozzles|Lower cutting quality than oxygen plasma<br>Slightly rough cut surfaces and possible slag formation<br>Limited performance when cutting thick material|
+|Applications|Carbon steel (such as SS400)<br>Medium plate and structural cutting<br>Productivity-oriented processes|General machining<br>Sites where low maintenance cost is important<br>Thin-sheet cutting|
 
 <br>
 
-### (3) 절단 시작 위치에 따른 분류
+### (2) Classification by Workpiece Thickness
 
-플라즈마 절단은 절단 시작 위치에 따라 작업 방식이 달라지며, 이는 절단 품질 및 장비 보호에 중요한 요소입니다. 조건 설정 페이지에서 반드시 선택하여야 하며 각기 다른 모션 시퀀스를 수행합니다.
+Cutting conditions and work methods vary according to workpiece thickness. In this function, the cutting condition is selected based on thickness.
 
-
-|비교| 엣지 스타트 <br> (Edge Start) | 피어싱 스타트 <br> (Piercing Start)| 
-|:--: |:--: |:--: |
-|방식 | 부재의 외곽(모서리)에서 절단 시작 | 부재 내부에서 절단을 시작하기 위해 천공(Piercing) 후 절단 | 
-| 특성 | 별도의 천공(Piercing) 과정이 필요 없음 <br> 장비 및 소모품에 대한 부담이 적음 <br> 절단 품질이 안정적이며 불량 발생이 적음 | 초기 아크로 소재를 뚫는 과정 필요 <br> 고온 스패터 발생 → 노즐/전극 손상 가능성 있음 <br> 절단 품질 및 성공 여부가 Piercing 조건에 크게 의존 | 
+|Comparison|Thin Plate|Medium Plate|Thick Plate|
+|:--:|:--:|:--:|:--:|
+|Thickness|Approximately 1-6 mm|Approximately 6-25 mm|25 mm or more|
+|Characteristics|High-speed, high-productivity cutting<br>Low current and high cutting speed<br>Because heat effects are significant, minimizing deformation is important|Balance between cutting speed and quality is important<br>Most commonly used range in industrial applications|Requires high current and sufficient gas flow<br>Piercing strongly affects quality (spatter and slag)<br>Piercing time and torch-height control are important|
 
 <br>
 
-위 작업 방식과는 별개로 절단부의 품질을 위해서 절단 경로를 추가할 수도 있습니다.
+### (3) Classification by Cutting Start Position
 
-|비교| 리드인 / 리드아웃 <br> (Lead-in / Lead-out)|
-|:--: |:--: |
-|방식 | 절단 시작 및 종료 시 본 가공 경로 외부에서 진입/이탈|
-| 특성 | 절단 시작부 품질 확보 <br> 노치(Notch) 및 과절단 방지 <br> 제품 형상 보호 가능|
+The cutting method differs according to the cutting start position, which is important for both cut quality and equipment protection. Select the method on the condition settings page. Each method uses a different motion sequence.
+
+|Comparison|Edge Start|Piercing Start|
+|:--:|:--:|:--:|
+|Method|Starts cutting at an outside edge or corner of the workpiece|Pierces the workpiece before starting a cut inside the workpiece|
+|Characteristics|No separate piercing process is required<br>Less load on the equipment and consumables<br>Stable cutting quality and fewer defects|The initial arc must pierce the material<br>High-temperature spatter may damage the nozzle or electrode<br>Cutting quality and success depend heavily on the piercing conditions|
+
+<br>
+
+Independently of the start method, additional tool paths may be used to improve the quality of the cut.
+
+|Comparison|Lead-in / Lead-out|
+|:--:|:--:|
+|Method|Enters or exits outside the actual machining path at the start and end of cutting|
+|Characteristics|Improves quality at the start of the cut<br>Prevents notches and overcutting<br>Protects the product profile|
 
 [__SOURCE](1-intro/3-configure.md)
-# 1.3 시스템 구성
+# 1.3 System Configuration
 
-하이퍼썸(Hypertherm) 플라즈마 절단 시스템과 로봇 제어기를 결합한 전체 시스템 구성은 정밀한 절단 품질과 자동화를 위해 다음과 같이 유기적으로 연결됩니다.
+The Hypertherm plasma cutting system and robot controller are integrated as shown below to provide precise cutting quality and automation.
 
-![그림1.1 시스템 구성](../_assets/configure.png)
+![Figure 1.1 System configuration](../_assets/configure.png)
 
 <br>
 
-### (1) 하이퍼썸 플라즈마 전원 장치 (Plasma Power Supply)  
-시스템의 핵심으로, 고압의 전력을 공급하여 플라즈마 아크를 생성합니다.
-- 기능: 전류 제어, 가스 유량 조절, 소모품 수명 모니터링 등을 수행합니다. (예: XPR  170)
-- 통신: 로봇 제어기와 인터페이스(이더캣)로 연결되어 실시간 절단 파라미터를 주고 받습니다.  
+### (1) Hypertherm Plasma Power Supply  
+The core of the system, this unit supplies high-voltage power to generate the plasma arc.
+- Functions: Controls current and gas flow and monitors consumable life (for example, XPR 170).
+- Communication: Connects to the robot controller through EtherCAT to exchange cutting parameters in real time.  
 
-### (2) 로봇 시스템 및 제어기 (Robot & Controller)  
-토치의 정밀한 움직임을 담당하는 구동부입니다.
-- 로봇 본체: 토치와 케이블 하중을 고려하여 10kg 이상의 6축 다관절 로봇을 사용하여 복잡한 3D 형상이나 경사 절단을 수행합니다.
-- 로봇 제어기:
-    - 하이퍼썸 전원 장치에 '절단 시작/종료' 신호를 보내고, 이동 속도와 경로를 계산하여 토치의 위치를 정밀하게 제어합니다.
-    - 절단 중 모재의 휘어짐이나 변형에 대응하여 토치와 모재 사이의 간격(전압 기준)을 일정하게 유지합니다. 로봇 제어기와 연동되어 실시간으로 Z축 높이를 보정함으로써 균일한 절단 폭을 보장합니다.
+### (2) Robot System and Controller  
+The drive system responsible for precise torch movement.
+- Robot: A six-axis articulated robot with a payload of at least 10 kg is used to accommodate the torch and cable load and perform complex 3D or bevel cuts.
+- Robot controller:
+    - Sends cutting start/stop signals to the Hypertherm power supply and precisely controls torch position by calculating the travel speed and path.
+    - Maintains a constant voltage-based gap between the torch and workpiece to compensate for workpiece warpage or deformation during cutting. Real-time Z-axis height compensation helps maintain a uniform kerf width.
 
-### (3) 가스 콘솔 (Gas Console)   
-절단 및 보호용 가스(산소, 질소, 공기 등)의 압력과 혼합비를 정밀하게 제어합니다.
-  - 기능: 재질과 두께에 최적화된 가스를 공급하여 절단면의 산화 방지 및 품질을 결정합니다.
-  - GCC(Gas Connect Console) : 가스 유량, 압력, 전환 등을 담당하여 플라즈마와 쉴드 가스를 공급하고 흐름을 제어합니다.
+### (3) Gas Console  
+Precisely controls the pressure and mixture ratio of cutting and shielding gases such as oxygen, nitrogen, and air.
+  - Function: Supplies gas optimized for the material and thickness, helping prevent oxidation and determine cut quality.
+  - GCC (Gas Connect Console): Supplies and controls plasma and shield gases, including gas flow, pressure, and switching.
 
-### (4) 토치 및 리드선 세트 (Torch & Lead Assembly)  
-로봇 팔 끝단에 장착되어 실제 절단이 이루어지는 부분입니다.
-  - 기능: 냉각수와 가스, 전력을 전원 장치로부터 전달받아 플라즈마를 방출합니다.
-  - TCC(Torch Connect Console) : 토치 관련 신호 및 전력을 전달하여 플라즈마 아크의 발생 및 제어합니다.
-  - 충돌 방지 장치(Collision Sensor): 토치가 모재나 장애물에 부딪혔을 때 로봇을 즉시 정지시켜 장비를 보호합니다.
+### (4) Torch and Lead Assembly  
+Mounted at the end of the robot arm, this assembly performs the actual cutting.
+  - Function: Receives coolant, gas, and power from the power supply and generates plasma.
+  - TCC (Torch Connect Console): Transfers torch-related signals and power to generate and control the plasma arc.
+  - Collision sensor: Immediately stops the robot if the torch contacts the workpiece or an obstacle, protecting the equipment.
 
-### (5) 접지 및 워크 리드 (Work Lead)  
-플라즈마 전원 장치로 부터 회로를 완성하기 위해 모재(절단물)에 연결하는 케이블입니다. 안정적인 아크 형성을 위해 확실한 접지가 필수적입니다.
+### (5) Ground and Work Lead  
+A cable connected to the workpiece to complete the circuit from the plasma power supply. Reliable grounding is essential for stable arc generation.
+
 [__SOURCE](2-application/README.md)
-# 2. 플라즈마 절단 응용
+# 2. Plasma Cutting Application
+
 [__SOURCE](2-application/1-communication/README.md)
-# 2.1 기본 설정
+# 2.1 Basic Settings
 
-플라즈마 절단 응용은 하이퍼썸(Hypertherm) XPR 절단기와 이더캣 통신을 수행합니다. 또한 터치센싱과 높이 제어를 위해 아크 응용의 일부 기능을 차용합니다. 따라서, 이더캣 설정과 블럭할당, 아크 용접기 및 신호 설정 등에 대한 설정이 필요합니다.
+The plasma cutting application communicates with a Hypertherm XPR plasma cutting system over EtherCAT. It also uses some arc-welding application functions for touch sensing and height control. EtherCAT, block assignment, arc welder, and signal settings must therefore be configured.
+
 [__SOURCE](2-application/1-communication/1-outline.md)
-## 2.1.1 통신 개요
+## 2.1.1 Communication Overview
 
-본 시스템은 고속 산업용 이더넷 표준인 EtherCAT 통신 프로토콜을 사용하여 로봇 제어기(Master)와 하이퍼썸 전원 장치(Slave) 간의 실시간 데이터 교환을 수행합니다. 이를 통해 절단 공정의 정밀한 제어와 진단 데이터 모니터링이 가능합니다.
+This system uses the high-speed industrial Ethernet protocol EtherCAT to exchange real-time data between the robot controller (master) and Hypertherm power supply (slave). This enables precise control of the cutting process and monitoring of diagnostic data.
 
-### (1) 역할 및 장점
-- 실시간성: 빠른 응답 속도로 로봇의 이동 경로와 플라즈마 아크 상태 동기화
-- 배선 단순화: 복잡한 아날로그/디지털 I/O 배선 대신 단일 이더넷 케이블로 모든 신호를 통합
-- 데이터 통합: 절단 전류, 가스 압력, 오류 코드 등 수많은 절단 파라미터를 실시간으로 송수신
+### (1) Roles and Advantages
+- Real-time performance: Synchronizes the robot motion path with the plasma arc state through fast response times.
+- Simplified wiring: Integrates all signals into a single Ethernet cable instead of complex analog/digital I/O wiring.
+- Integrated data: Sends and receives numerous cutting parameters, including cutting current, gas pressure, and error codes, in real time.
 
-### (2) 주요 제어 및 모니터링 항목 (Process Data Objects, PDO)
-EtherCAT 통신을 통해 로봇 제어기에서 다음과 같은 핵심 기능을 수행합니다.
-- 제어 신호 (Output to Plasma)
-  - 플라즈마 시작(Plasma Start): 절단 아크 시작 및 종료 명령을 위한 신호
-  - 점화 유지(Hold ignition): 아크 시작 신호와 동시에 활성화 되며, preflow 상태에서 아크를 유지하기 위해 사용
-  - 천공(Pierce): 천공시작 후 대기 시간 동안 ON 상태 유지
-  - 프로세스 ID 변경(Request new process): 절단 중 ID를 변경하는 용도이나, 실제 미사용
+### (2) Main Control and Monitoring Items (Process Data Objects, PDO)
+The robot controller performs the following key functions over EtherCAT.
+- Control signals (output to plasma)
+  - Plasma Start: Signal used to start and stop the cutting arc.
+  - Hold Ignition: Activated together with the arc start signal and used to maintain the arc in the pre-flow state.
+  - Pierce: Remains ON during the wait period after piercing starts.
+  - Request New Process: Intended to change the process ID during cutting, but not currently used.
 
-- 상태 피드백 (Input from Plasma)
-  - 로봇 모션(Machine motion): 천공 대기 후 모션 가능 
-  - 작업 시작(Ready for start): 프로세스 ID 수신 후 설정 완료
-  - 에러(Error): 장비 내부 오류 알림
-  - 공정 준비(Process ready): 프로세스 ID 입력 대기 
-  - 오믹 접촉(Ohmic contact): 토치와 부재의 접촉 확인 신호로 터치 센싱 시 활용
-  - 원격 전원 상태(Remote power status): 절단기의 전원 입력 상태 확인
-  - 아크 전압(arc voltage): 절단기 전압 피드백으로 높이 제어 시 활용
-  - 시스템 정보(system info): 현재 에러 코드
+- Status feedback (input from plasma)
+  - Machine Motion: Indicates that robot motion is permitted after the piercing delay.
+  - Ready for Start: Indicates that setup is complete after receiving the process ID.
+  - Error: Indicates an internal equipment error.
+  - Process Ready: Indicates that the system is waiting for a process ID.
+  - Ohmic Contact: Indicates contact between the torch and workpiece and is used for touch sensing.
+  - Remote Power Status: Indicates the power state of the plasma cutting system.
+  - Arc Voltage: Voltage feedback used for height control.
+  - System Info: Current error code.
 
-### (3) 상태 확인 및 설정 (Service Data Objects, SDO)
- - 절단 조건 설정
-   - 프로세스 ID(Process ID): 절단기에 설정된 현재 프로세스 ID 
-   - 조건 파라미터(Condition Parameters): 전류, 가스 압력 등 각종 절단 조건 파라미터 설정
-   - 가스 시험(Gas test): preflow, cutflow, pierce flow 등 가스 수동 출력
+### (3) Status Check and Settings (Service Data Objects, SDO)
+ - Cutting condition settings
+   - Process ID: Current process ID set in the plasma cutting system.
+   - Condition Parameters: Cutting condition parameters such as current and gas pressure.
+   - Gas Test: Manual gas output for pre-flow, cut-flow, and pierce-flow.
 
- - 설정 상태 확인
-   - Process ID: 절단기에 설정된 현재 프로세스 ID 
+ - Setting status check
+   - Process ID: Current process ID set in the plasma cutting system.
 
-### (4) 하드웨어 연결 및 설정
-- 연결 포트: 하이퍼썸 전원 장치 후면의 EtherCAT 전용 포트와 로봇 제어기의 LAN 포트 #3을 연결합니다.
-- ESI 파일 (EtherCAT Slave Information): 하이퍼썸에서 제공하는 장치 설명 파일(XML 형식)을 로봇 제어기 설정 소프트웨어에 로드하여 통신 맵이 구성되어 있습니다. 산업용 통신 설정에서 해당 통신 장비를 선택하시면 됩니다.
-
+### (4) Hardware Connection and Setup
+- Connection port: Connect the dedicated EtherCAT port on the rear of the Hypertherm power supply to LAN port #3 on the robot controller.
+- ESI file (EtherCAT Slave Information): The communication map is configured by loading the XML device-description file provided by Hypertherm into the robot controller setup software. Select the corresponding communication device in the industrial communication settings.
 
 [__SOURCE](2-application/1-communication/2-ethercat.md)
-## 2.1.2 이더캣 설정
+## 2.1.2 EtherCAT Settings
 
-이더캣 마스터 설정은 기본적으로 산업용 통신 매뉴얼에서 설명하고 있습니다. 본 ㅣ
+General EtherCAT master setup is described in the Industrial Communication Manual. The settings required for this application are described below.
 
+### (1) Hardware Connection and Setup
+- Connection port: Connect the dedicated EtherCAT port on the rear of the Hypertherm power supply to LAN port #3 on the robot controller.
+- ESI file (EtherCAT Slave Information): The communication map is configured by loading the XML device-description file provided by Hypertherm into the robot controller setup software. Select the corresponding communication device in the industrial communication settings.
 
-### (1) 하드웨어 연결 및 설정
-- 연결 포트: 하이퍼썸 전원 장치 후면의 EtherCAT 전용 포트와 로봇 제어기의 LAN 포트 #3을 연결합니다.
-- ESI 파일 (EtherCAT Slave Information): 하이퍼썸에서 제공하는 장치 설명 파일(XML 형식)을 로봇 제어기 설정 소프트웨어에 로드하여 통신 맵이 구성되어 있습니다. 산업용 통신 설정에서 해당 통신 장비를 선택하시면 됩니다.
+![Figure 2.1 EtherCAT master settings](../../_assets/ecat_master.png)
 
-![그림2.1 이더캣 마스터 설정](../../_assets/ecat_master.png)
+### (2) Block Assignment
+- Fieldbus I/O block selection: Select `EtherCAT I/O` for one of the ten available fb blocks. The selected block number is used when configuring the arc signals.
 
-### (2) 블럭 할당
-- 필드 버스 IO 블럭 선택: 10개의 fb 블럭 가운데 원하는 번호에서 '이더캣 IO' 항목을 선택합니다. 해당 블럭 번호는 아크 신호 설정에 사용됩니다.
+![Figure 2.2 fb block assignment](../../_assets/fb_block.png)
 
-![그림2.2 fb 블럭 할당](../../_assets/fb_block.png)
 [__SOURCE](2-application/1-communication/3-arcwelder.md)
-## 2.1.3 아크 용접기 설정
+## 2.1.3 Arc Welder Settings
 
-플라즈마 절단 응용에 해당 하는 아크 용접기 타입은 범용 용접기 입니다. 아래의 절차대로 용접기 설정을 수행합니다.
-
-<br>
-
-### (1) 용접기 선택
- 
- `[F2:시스템, 5:초기화, 3:용도 설정]` 에서 아크용접을 유효로 선택하고 용접기 제조사 번호를 '9'로 입력합니다. (9:범용 용접기)  
- `[용접기 설정]` 버튼을 누르면 범용 용접기 설정 페이지로 연결됩니다.
-
-![그림2.3 범용 용접기](../../_assets/gerneral_welder.png)
+The arc welder type used by the plasma cutting application is General Welder. Configure the welder as described below.
 
 <br>
 
-### (2) 신호 입력
- 일반 용접기 조건 페이지는 용접기, 입력 신호 할당, 출력 신호 할당 탭으로 구성되어 있습니다. 아크 용접기의 설정 화면을 공유하기 때문에 기존 아크 항목과 유사한 플라즈마 절단 신호가 설정되도록 하였습니다.
+### (1) Selecting the Welder
 
- - 입력 신호 할당  
- 입력 신호 할당 탭에서 `[자동 설정]` 버튼을 누릅니다. 세부 항목 중에서 Hypertherm-XPR 모델을 순차적으로 선택하고, 기존에 할당했던 FB 블럭의 시작주소를 입력합니다.
-   
+Under `[F2: System > 5: Initialization > 3: Application Settings]`, enable arc welding and enter welder manufacturer number `9` (9: General Welder).  
+Press `[Welder Settings]` to open the General Welder settings page.
 
-![그림2.4 범용 용접기](../../_assets/sig_assign_in.png)
-
- - 출력 신호 할당
- 출력 신호 할당 탭에서 `[자동 설정]` 버튼을 누릅니다. 세부 항목 중에서 Hypertherm-XPR 모델을 순차적으로 선택하고, 기존에 할당했던 FB 블럭의 시작주소를 입력합니다.
-
-![그림2.5 용접기 조건](../../_assets/sig_assign_out.png)
+![Figure 2.3 General Welder settings](../../_assets/gerneral_welder.png)
 
 <br>
 
-### (3) 신호 할당 확인
+### (2) Signal Assignment
+The General Welder condition page consists of the Welder, Input Signal Assignment, and Output Signal Assignment tabs. Because the arc welder settings screen is shared, plasma cutting signals are assigned to corresponding arc-welding items.
 
-기존 아크 범용 용접기의 항목과 유사한 항목에 할당 주소가 표시되며, 플라즈마 절단 모니터링 화면에서 상태를 확인할 수 있습니다.  
-FB 블럭할당에서 fb1을 선택한 경우 아래 표와 같은 주소가 자동으로 할당됩니다.
+ - Input signal assignment  
+ On the Input Signal Assignment tab, press `[Auto Setup]`. Select the Hypertherm-XPR model from the detailed options, and then enter the start address of the previously assigned FB block.
 
+![Figure 2.4 Input signal assignment](../../_assets/sig_assign_in.png)
+
+ - Output signal assignment  
+ On the Output Signal Assignment tab, press `[Auto Setup]`. Select the Hypertherm-XPR model from the detailed options, and then enter the start address of the previously assigned FB block.
+
+![Figure 2.5 Output signal assignment](../../_assets/sig_assign_out.png)
 
 <br>
 
-|분류|아크용접|플라즈마 절단|신호 할당|
-|:--:|:--:|:--:|:--:|
-|입력|용접기 사용 가능|원격 전원 상태(remote power status)|fb1.9|
-|입력|와이어 용착 신호|오믹 접촉(ohmic contact)|fb1.8|
-|입력|프로세스 활성화|공정 준비 완료(process ready)|fb1.5|
-|입력|통신준비 완료|시작 준비 완료(ready for start)|fb1.2|
-|입력|용접기 에러 신호|에러|fb1.4|
-|입력|로봇 모션(machine motion)|로봇 모션(machine motion)|fb1.0|
-|입력|에러 우선순위 수준-error|에러 우선순위 수준-error|fb1.10|
-|입력|에러 우선순위 수준-failure|에러 우선순위 수준-failure|fb1.11|
-|입력|용접 전류|전류|fb1.16 ~ fb1.31|
-|입력|용접 전압|전압|fb1.48 ~ fb1.63|
-|입력|용접기 에러 번호|에러 번호|fb1.8 ~ fb1.23|
-|**출력**|아크 ON|플라즈마 ON|fb1.0|
-|**출력**|점화 유지(hold ignition)|점화 유지(hold ignition)|fb1.1|
-|**출력**|천공(pierce)|천공(pierce)|fb1.2|
+### (3) Verifying Signal Assignment
+
+Assigned addresses are displayed for items corresponding to the existing General Arc Welder signals. Their states can be checked on the plasma cutting monitoring screen.  
+If fb1 is selected during FB block assignment, the addresses are assigned automatically as shown below.
+
+<br>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center;">Type</th>
+      <th style="text-align: center;">Arc Welding</th>
+      <th style="text-align: center;">Plasma Cutting</th>
+      <th style="text-align: center;">Signal Assignment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center" rowspan="10">Input</td>
+      <td align="center">Welder available</td>
+      <td align="center">Remote power status</td>
+      <td align="center">fb1.9</td>
+    </tr>
+    <tr>
+      <td align="center">Wire stick signal</td>
+      <td align="center">Ohmic contact</td>
+      <td align="center">fb1.8</td>
+    </tr>
+    <tr>
+      <td align="center">Process active</td>
+      <td align="center">Process ready</td>
+      <td align="center">fb1.5</td>
+    </tr>
+    <tr>
+      <td align="center">Communication ready</td>
+      <td align="center">Ready for start</td>
+      <td align="center">fb1.2</td>
+    </tr>
+    <tr>
+      <td align="center">Welder error signal</td>
+      <td align="center">Error</td>
+      <td align="center">fb1.4</td>
+    </tr>
+    <tr>
+      <td align="center">Machine motion</td>
+      <td align="center">Machine motion</td>
+      <td align="center">fb1.0</td>
+    </tr>
+    <tr>
+      <td align="center">Error priority level - error</td>
+      <td align="center">Error priority level - error</td>
+      <td align="center">fb1.10</td>
+    </tr>
+    <tr>
+      <td align="center">Error priority level - failure</td>
+      <td align="center">Error priority level - failure</td>
+      <td align="center">fb1.11</td>
+    </tr>
+    <tr>
+      <td align="center">Welding voltage</td>
+      <td align="center">Voltage</td>
+      <td align="center">fb1.16 ~ fb1.31</td>
+    </tr>
+    <tr>
+      <td align="center">Welder error number</td>
+      <td align="center">Error number</td>
+      <td align="center">fb1.48 ~ fb1.63</td>
+    </tr>
+    <tr>
+      <td align="center" rowspan="3"><strong>Output</strong></td>
+      <td align="center">Arc ON</td>
+      <td align="center">Plasma ON</td>
+      <td align="center">fb1.0</td>
+    </tr>
+    <tr>
+      <td align="center">Hold ignition</td>
+      <td align="center">Hold ignition</td>
+      <td align="center">fb1.1</td>
+    </tr>
+    <tr>
+      <td align="center">Pierce</td>
+      <td align="center">Pierce</td>
+      <td align="center">fb1.2</td>
+    </tr>
+  </tbody>
+</table>
+
 [__SOURCE](2-application/2-settings/README.md)
-# 2.2 절단 조건 설정
+# 2.2 Cutting Condition Settings
 
-`plasma on/off cnd=#` 명령어에서 입력한 조건번호에 해당하는 설정값들을 편집합니다. 조건번호를 추가할 때마다 'cnd_#' 의 형식으로 조건 이름이 부여됩니다. 각 조건번호는 시작조건, 모션조건, 종료조건으로 구성되어 있습니다.
+Edit the settings associated with the condition number specified by the `plasma on,cnd=#` command. Each added condition is named in the `cnd_#` format. Each condition number contains start, motion, and end conditions.
 
 [__SOURCE](2-application/2-settings/1-start-cnd.md)
-## 2.2.1 시작 조건
-`plasma on` 명령어 수행시에 절단기로 전송되는 설정값들입니다. 부재 두께를 입력하고  절단 차트에서 작업 상황에 맞는 프로세스 ID를 입력하면 기본 설정들이 표시됩니다. 표시된 값들은 절단 품질을 고려하여 가장 추천하는 설정이나 특별한 작업 상황이나 부품의 상태등에 따라 사용자가 수정할 수 있습니다.
+## 2.2.1 Start Conditions
 
-![그림2.5 시작 조건](../../_assets/start_cnd.png)
+These settings are sent to the plasma cutting system when the `plasma on` command is executed. Enter the workpiece thickness and select the process ID appropriate for the operation from the cut chart to display the default settings. The displayed values are the recommended settings for cutting quality, but they may be adjusted for special operating conditions or workpiece conditions.
 
+![Figure 2.6 Start conditions](../../_assets/start_cnd.png)
 
-(1) 절단 타입  
-기본적으로 절단 기능을 가장 많이 사용하나 가우징과 마킹 기능도 제공합니다.
-    
+(1) Process Type  
+Cutting is the most commonly used process, but gouging and marking are also supported.
 
-(2) 소재  
-현재는 연강(mild steel)만 제공하고 있습니다.
+(2) Material  
+Currently, only mild steel is supported.
 
-(3) 두께  
-절단 부재의 두께를 입력합니다.
+(3) Thickness  
+Enter the thickness of the workpiece.
 
-(4) 프로세스 ID  
-두께를 입력하면 절단 차트로 부터 해당하는 프로세스 ID가 나열됩니다. 보다 자세한 절단 정보를 확인하기 위해서 `[F1: 프로세스 ID 선택]` 를 누르면 절단 차트가 팝업됩니다. 두께 기준으로 정렬된 표에서 원하는 프로세스 ID를 선택할 수 있습니다.
+(4) Process ID  
+After entering the thickness, the applicable process IDs from the cut chart are listed. To view detailed cutting information, press `[F1: Select Process ID]` to open the cut chart. Select the desired process ID from the table sorted by thickness.
 
-![그림2.6 절단 차트](../../_assets/cut_chart.png)
+![Figure 2.7 Cut chart](../../_assets/cut_chart.png)
 
-(5) 이동 속도  
-천공(piercing)이 완료된 이후에 절단 경로를 따라 로봇을 이동 할때 입력되는 속도입니다. 해당 입력창에 입력된 값은 `plasma on` 명령어 실행 시에 `_plasma.speed` 라는 이름의 시스템 변수에 저장됩니다. 사용자는 잡 프로그램 작성시에 이 변수를 속도 파라미터에 입력합니다.
+(5) Travel Speed  
+The speed at which the robot follows the cutting path after piercing is complete. When the `plasma on` command is executed, the value entered here is stored in the `_plasma[cnd#].speed` system variable. Use this variable as the speed parameter in the job program.
 
-(6) 플라즈마/쉴드  
-플라즈마 아크와 쉴드를 위한 가스 종류가 선택됩니다. 연강 절단인 경우에 산소-공기, 공기-공기가 선택되면 해당 항목은 수정이 불가합니다.
+(6) Plasma / Shield  
+Selects the gases used for the plasma arc and shielding. When oxygen-air or air-air is selected for mild-steel cutting, this item cannot be edited.
 
-(7) 전류  
-절단시 적용되는 전류값입니다. 하이퍼썸 절단기 사양에 따라 최고 전류가 제한됩니다. (ex. XPR300 : max 300A)
+(7) Current  
+The current applied during cutting. The maximum current is limited by the Hypertherm plasma cutting system specifications (for example, XPR300: max. 300 A).
 
-(8) 전압  
-절단시 적용되는 전압값입니다. 높이 제어시에 이 값이 유지 되도록 부재와 토치사이의 간격을 유지합니다.
+(8) Voltage  
+The voltage applied during cutting. Height control maintains the distance between the torch and workpiece so that this voltage remains constant.
 
-(9) 플라즈마 유압 (plasma flow)  
-플라즈마 가스의 유압을 설정합니다.
+(9) Plasma Flow  
+Sets the plasma gas pressure.
 
-(10) 쉴드 유압  (shield flow)    
-쉴드 가스의 유압을 설정합니다.
+(10) Shield Flow  
+Sets the shield gas pressure.
 
-(11) 천공 유압 (pierce flow)    
-천공시 유압을 설정합니다.
+(11) Pierce Flow  
+Sets the gas pressure used during piercing.
 
-(12) 천공 지연 (pierce delay)  
-천공 위치에서 천공이 완료될때 까지 대기 하는 시간입니다. 완료 후에 모션 가능 상태가 됩니다.
+(12) Pierce Delay  
+The time to wait at the piercing position until piercing is complete. Robot motion is enabled after this time elapses.
 
-(13) 토치 보호 (torch protection)
-절단 전류의 불안정으로 인한 전극 고장을 감지하여 토치의 손상을 예방하는 기능입니다.
+(13) Torch Protection  
+Detects electrode failures caused by unstable cutting current to help prevent torch damage.
 
-(14) 전류하강 에러 보호 (ramp-down error protection)  
-절단 종료를 감지하여 전류와 가스 공급을 점차적으로 줄여서 전극을 보호하고 소모품의 수명을 늘려주는 기능입니다.
-
+(14) Ramp-down Error Protection  
+Detects the end of cutting and gradually reduces current and gas supply to protect the electrode and extend consumable life.
 
 [__SOURCE](2-application/2-settings/2-motion-cnd.md)
-## 2.2.2 모션 조건
+## 2.2.2 Motion Conditions
 
-![그림2.7 모션 조건](../../_assets/motion_cnd.png)
+![Figure 2.8 Motion conditions](../../_assets/motion_cnd.png)
 
-(1) 시작 타입  
-부재면 내에서 천공(piercing)을 하면서 시작하는 타입과 에지에서 천공없이 절단을 시작하는 타입으로 구분합니다.
+(1) Start Type  
+Select either piercing start, which starts by piercing inside the workpiece, or edge start, which begins cutting at an edge without piercing.
 
-(2) 천공 속도  
-천공 높이로 (pierce height) 이동할때 사용하는 속도입니다.
+(2) Piercing Speed  
+The speed used to move to the piercing height.
 
-(3) 절단 속도  
-절단 높이로 (cutting height) 이동할때 사용하는 속도입니다.
+(3) Cutting Speed  
+The speed used to move to the cutting height.
 
-(4) 트랜스퍼 높이 (transfer height)  
-아크 트랜스퍼를 위한 높이 설정입니다.
+(4) Transfer Height  
+Sets the height used for arc transfer.
 
-(5) 천공 높이 (pierce height)  
-천공 시작을 위한 높이 설정입니다.
+(5) Pierce Height  
+Sets the height at which piercing starts.
 
-(6) 절단 높이 (transfer height)  
-천공 이후 절단 이송을 시작하기 위한 높이 설정입니다.
+(6) Cutting Height  
+Sets the height at which cutting travel begins after piercing.
 
+(7) Kerf Compensation  
+A path compensation value that accounts for the width of material removed by the plasma arc. Use one-half of the kerf width shown in the cut chart directly as the path correction value.
 
-(7) 절삭폭 보정 (kerf compensation)  
-아크 형상의 폭 길이 만큼 부재가 절삭되는 것을 고려하여 절삭 경로를 수정하기 위한 경로 보정값입니다.
+(8) Torch Angle  
+Sets the torch tilt angle relative to the workpiece during gouging. This value is available to job programs through the `_plasma[cnd#].torch_angle` system variable.
 
+(9) Motion Delay  
+Sets the time to wait while maintaining the arc at the end of gouging. This value is available to job programs through the `_plasma[cnd#].motion_delay` system variable.
 
-
-[__SOURCE](2-application/2-settings/3-end-cnd.md)
-## 2.2.3 종료 조건
-
-![그림2.8 종료 조건](../../_assets/end_cnd.png)
-
-`plasma off` 명령어 수행시에 적용되는 설정입니다.
-
-(1) 플라즈마 off 지연 시간  
-플라즈마 off 시 아크를 유지하는 시간 설정입니다.
+(10) Motion Coordinate System  
+Sets the user coordinate system used as the reference when moving to the cutting height during gouging. To account for the torch angle, the torch moves to the cutting height along the selected user-coordinate direction rather than the tool direction.
 
 [__SOURCE](2-application/3-motion/README.md)
-# 2.3 로봇 모션
+# 2.3 Robot Motion
 
-양호한 절단 품질을 위해서 로봇 모션은 두 가지 기능이 요구됩니다. 부재와 토치사이의 거리를 제어하기 위한 툴 Z방향의 모션 제어와 티칭된 경로를 이동하면서 부재를 절단할때 절삭폭을 고려한 툴 Y방향 쉬프트 모션입니다.
+Two robot motion functions are required to achieve good cutting quality: motion control in the tool Z direction to control the distance between the torch and workpiece, and shift motion in the tool Y direction to compensate for the kerf while the robot cuts along the taught path.
+
 [__SOURCE](2-application/3-motion/1-height-ctrl.md)
-## 2.3.1 높이 제어
+## 2.3.1 Height Control
 
-플라즈마 절단 시 토치와 모재 사이의 거리는 절단 품질과 소모품 수명에 직결됩니다. 본 시스템은 '아크 전압과 거리의 상관관계'를 이용하여 절단 중 토치 높이를 실시간으로 보정합니다.
+During plasma cutting, the distance between the torch and workpiece directly affects cutting quality and consumable life. This system corrects the torch height in real time during cutting by using the relationship between arc voltage and distance.
 
-(1) 제어 원리 (Principle of Operation)  
+(1) Principle of Operation  
 
-![그림2.9 토치거리와 전압](../../_assets/height_ctrl.png)
+![Figure 2.10 Torch distance and voltage](../../_assets/height_ctrl.png)
 
- - 전압과 거리의 관계: 플라즈마 아크의 전압은 토치와 모재 사이의 거리가 멀어지면 높아지고, 가까워지면 낮아지는 특성을 가집니다.
- - 피드백 루프: 로봇 제어기는 하이퍼썸 전원 장치로부터 실시간 아크 전압(Actual Voltage) 데이터를 EtherCAT 통신으로 주기적으로 수신합니다.
- - 보정 동작: 수신된 실제 전압을 사용자가 설정한 목표 전압(Set Voltage)과 비교하여, 그 차이만큼 로봇의 Z축(높이)을 실시간으로 상하 이동시킵니다.  본 기능은 기존 아크 용접에서 사용하는 `heightsen` 명령어를 사용합니다.
+ - Voltage-distance relationship: Plasma arc voltage increases as the distance between the torch and workpiece increases, and decreases as the distance becomes smaller.
+ - Feedback loop: The robot controller periodically receives actual arc-voltage data from the Hypertherm power supply over EtherCAT.
+ - Correction: The controller compares the measured voltage with the target voltage set by the user and moves the robot up or down along the Z axis in real time according to the difference. This function uses the `heightsen` command provided by the arc-welding application.
 
-(2) 주요 제어 단계  
- - IHS (초기 높이 감지): 절단 시작 전, 토치를 하강시켜 모재의 위치를 파악하고 정확한 피어싱/절단 시작 높이를 설정합니다.  
- - 전압 샘플링 (Voltage Sampling): 절단이 시작되고 아크가 안정화되면, 시스템은 현재의 전압을 측정합니다. 
- - 추종 및 보정: 모재가 휘어 있거나 경사가 있더라도, 측정되는 전압을 일정하게 유지하도록 토치 높이를 조절하여 일정한 절삭 폭(Kerf)을 유지합니다.  
+(2) Main Control Stages  
+ - IHS (Initial Height Sensing): Before cutting starts, the torch is lowered to locate the workpiece surface and establish the correct piercing/cutting start height.  
+ - Voltage Sampling: Once cutting has started and the arc has stabilized, the system measures the current voltage.  
+ - Tracking and correction: Even if the workpiece is warped or inclined, the torch height is adjusted to maintain a constant measured voltage and uniform kerf width.  
 
-(3) 주요 설정 파라미터  
- - 목표 전압 (Set Voltage): 희망하는 절단 높이에 해당하는 전압 값입니다. 하이퍼썸 공정 도표(Cut Chart)에 명시된 값을 기준으로 설정합니다.
- - THC 감도 (Gain/Sensitivity): 전압 차이에 반응하는 속도입니다. 너무 높으면 토치가 위아래로 진동(Hunting)할 수 있고, 너무 낮으면 모재의 굴곡을 따라가지 못합니다.
- - THC 지연 시간 (THC Delay): 피어싱 후 아크가 완전히 안정될 때까지 높이 제어를 잠시 유보하는 시간입니다.
+(3) Main Setting Parameters  
+ - Set Voltage: The voltage corresponding to the desired cutting height. Set this value based on the Hypertherm cut chart.
+ - THC Gain/Sensitivity: The response rate to a voltage difference. If it is too high, the torch may hunt up and down; if it is too low, the torch may not follow workpiece contours.
+ - THC Delay: The period after piercing during which height control is suspended until the arc is fully stabilized.
 
 [__SOURCE](2-application/3-motion/2-kerf-ctrl.md)
-## 2.3.2 절삭 폭 보정 기능
+## 2.3.2 Kerf Compensation
 
-플라즈마 아크는 일정한 두께(절단폭)를 가지며 소재를 녹여내기 때문에, 설계 도면의 치수와 동일한 결과물을 얻기 위해서는 토치의 중심 경로를 절단면 바깥쪽으로 이동시키는 보정(Compensation) 모션이 필수적입니다. 
+Because the plasma arc has a finite width and removes material as it cuts, compensation motion that offsets the torch center path away from the finished surface is required to produce dimensions that match the design drawing.
 
-(1) 절단면 품질 차이
- -  원인 : 플라즈마 가스는 토치 내부에서 스월 링 (swirl ring)에 의해 회전하면서 분사됩니다. 이로 인해 아크가 한쪽 방향으로 비대칭적으로 치우치게 되고 더 강하게 배출됩니다. 에너지 분포의 차이는 절단면 좌우의 품질 차이로 이어집니다.
- - 품질 차이
-   - 양호한 면 : 직각도가 우수하고 절단면이 매끄러우며 슬래그 부착이 적습니다.
-   - 불량한 면 : 경사(bevel)가 발생하고 절단면이 거칠며 슬래그 부착이 증가합니다.
+(1) Difference in Cut-surface Quality
+ - Cause: Plasma gas is rotated by the swirl ring inside the torch as it is discharged. This makes the arc asymmetric and stronger on one side. The resulting difference in energy distribution produces different cut quality on the two sides.
+ - Quality difference
+   - Good side: High squareness, smooth cut surface, and minimal slag adhesion.
+   - Poor side: Beveling, a rough cut surface, and increased slag adhesion.
 
-{% hint style="info" %}  
-    양호한 절단면은 대체로 진행 방향의 오른쪽입니다. 티칭 및 로봇 모션시 오른쪽 면이 사용면이 되도록 모션방향을 정해야합니다. 또한 절삭 폭 보정시에도 양호한 면 방향으로 쉬프트해야 합니다.
+{% hint style="info" %}
+The good cut surface is generally on the right side of the direction of travel. Set the teaching and robot motion direction so that the right-hand surface is the finished surface. Kerf compensation must also shift the torch toward the good side.
 {% endhint %}
 
-(1) 절단폭(Kerf)과 쉬프트의 원리  
- - 절단폭(Kerf Width): 플라즈마 아크에 의해 실제 제거되는 금속의 폭입니다. 이는 노즐 사이즈, 전류량, 절단 속도 및 소재 두께에 따라 달라집니다.
- - 쉬프트 거리(Offset Distance): 절단폭의 절반(1/2 Kerf)만큼 토치를 진행 방향의 좌측 또는 우측으로 이동시킵니다. (예: 절단폭이 2.0mm인 경우, 토치 중심을 티칭 라인에서 1.0mm 바깥으로 쉬프트합니다.)
+(2) Kerf and Shift Principle  
+ - Kerf width: The width of metal actually removed by the plasma arc. It varies according to nozzle size, current, cutting speed, and material thickness.
+ - Offset distance: Shift the torch left or right by half of the kerf width. For example, if the kerf width is 2.0 mm, shift the torch center 1.0 mm outward from the taught line.
 
-![그림2.10 토치거리와 전압](../../_assets/kerf.png)
+![Figure 2.11 Kerf compensation](../../_assets/kerf.png)
 
-(2) 툴 좌표계 기반 X방향 쉬프트 (TCP Shift)  
- - 로봇 제어기에서 토치의 진행 방향을 기준으로 보정 값을 적용합니다.
- - 좌우 보정(Left/Right Offset): 로봇의 툴 좌표계(Tool Coordinates) 상에서 진행 방향에(+X) 수직인 축(+- Y)을 제어하여 경로를 쉬프트 시킵니다.
- - 보정 방향 결정
-   - 좌보정(-Y): 토치 진행 방향의 왼쪽으로 쉬프트 (일반적인 시계 반대방향 외부 절단 시(내부 사용))
-   - 우보정(+Y): 토치 진행 방향의 오른쪽으로 쉬프트 (내부 구멍 절단 시(외부 사용))  
+(3) Tool-coordinate Y-direction Shift (TCP Shift)  
+ - The robot controller applies the compensation value relative to the torch travel direction.
+ - Left/right offset: The path is shifted by controlling the axis (±Y) perpendicular to the travel direction (+X) in the robot tool coordinate system.
+ - Determining the compensation direction
+   - Left compensation (-Y): Shifts the torch to the left of the travel direction. This is generally used for counterclockwise outside cutting when the inside surface is used.
+   - Right compensation (+Y): Shifts the torch to the right of the travel direction. This is used for inside-hole cutting when the outside surface is used.  
 
-(3) 하이퍼썸 공정 도표(Cut Chart) 활용  
- - 절삭 폭 정보 : 하이퍼썸 매뉴얼의 'Cut Chart'에는 각 조건별 [Kerf Width] 예상값이 명시되어 있습니다.
-로봇 제어기의 레지스터(Register)에 이 값을 입력하면, 프로그램 내에서 계산식을 통해 자동으로 쉬프트 거리가 산출되도록 구성합니다.
- - 보정값 = 공정도표 절단폭 / 2 + 여유치(Margin = 0)  
+(4) Using the Hypertherm Cut Chart  
+ - Kerf information: The Hypertherm manual's cut chart provides an estimated kerf width for each condition. Enter this value in a robot controller register so that the shift distance can be calculated automatically in the program.
+ - Compensation value = cut-chart kerf width / 2 + margin (margin = 0)  
 
-(4) 주요 설정 및 주의 사항  
- - 리드인(Lead-in) 구간의 중요성: 쉬프트 모션은 절단 시작점 이전인 리드인 구간에서 점진적으로 적용되어야 합니다. 실제 제품 라인에 진입했을 때는 이미 보정 거리가 확보된 상태여야 단면에 턱이 생기지 않습니다.
- - 속도 변화에 따른 보정: 절단 속도가 느려지면 절단폭이 넓어지므로, 코너 구간 등에서 속도가 감속될 경우 쉬프트 거리를 미세하게 조정하거나 속도를 일정하게 유지하는 것이 중요합니다.
- - 소모품 마모 고려: 노즐이 마모될수록 아크가 굵어져 절단폭이 넓어집니다. 정기적으로 테스트 피스를 절단하여 치수를 측정한 후 쉬프트 값을 보정하십시오. 
+(5) Main Settings and Precautions  
+ - Importance of the lead-in: Shift motion must be applied gradually along the lead-in before the cutting start point. The full compensation distance must already be established when the torch enters the product profile to prevent a step on the cut surface.
+ - Compensation for speed changes: Kerf width increases as cutting speed decreases. If the robot decelerates at a corner or similar section, fine-tune the shift distance or maintain a constant speed.
+ - Consumable wear: As the nozzle wears, the arc becomes wider and the kerf increases. Periodically cut and measure a test piece, and then adjust the shift value.
+
 [__SOURCE](2-application/4-programming/README.md)
-# 2.4 로봇 프로그래밍
+# 2.4 Robot Programming
 
+A robot cutting job program defines not only the robot motion path, but also a sequence that synchronizes cutting parameters through real-time communication with the Hypertherm power supply.
 
-로봇 절단 잡(Job) 프로그램은 단순히 로봇의 이동 경로(Path)만을 정의하는 것이 아니라, 하이퍼썸 전원 장치와의 실시간 통신을 통해 절단 파라미터를 동기화하는 일련의 시퀀스를 포함합니다.
 [__SOURCE](2-application/4-programming/1-system-vars.md)
-## 2.4.1 시스템 변수
-    
-  - _plasma.process_id
-    - 용도 : 플라즈마 절단기로 프로세스 ID를 전송, ID는 조건 설정 페이지에서 두께에 맞게 선택
-    - 작동 : 입력된 ID 값이 이더캣 통신으로 전달되고, 설정 완료시 'ready for start' 상태가 ON 됨
-    - 사용법 : 대입문의 좌변에 해당 시스템 변수를 선택하고 우변에 프로세스 ID를 입력함
-    - 사용 예제
+## 2.4.1 System Variables
+
+![Figure 2.12 System variable list](../../_assets/system_var.png)
+
+<br>
+
+  - `_plasma.process_id`
+    - Purpose: Sends a process ID to the plasma cutting system. Select an ID appropriate for the material thickness on the condition settings page.
+    - Operation: The entered ID is sent over EtherCAT. When setup is complete, the Ready for Start state turns ON.
+    - Usage: Select this system variable on the left side of an assignment statement and enter the process ID on the right side.
+    - Example
        ```python
        _plasma.process_id = 1000
        ```
 
-
-  - _plasma.speed
-    - 용도 : 프로세스 ID 마다 설정된 절단 속도를 사용자가 쉽게 입력하도록 함
-    - 작동 : `plasma on,cnd=1` 명령어의 조건 번호에 설정된 절단 속도를 해당 시스템 변수로 가져옴
-    - 사용법 : `move`문의 속도 변수에 해당 시스템 변수를 사용함 (mm/sec)
-    - 사용 예제
+  - `_plasma[cnd#].speed`
+    - Purpose: Lets the user easily apply the cutting speed configured for each process ID.
+    - Operation: Retrieves the cutting speed configured for the specified cutting condition number.
+    - Usage: Use this system variable as the speed parameter of a `move` statement (mm/sec).
+    - Example
         ```python
         plasma on,cnd=1
-        move P,spd=_plasma.speed,accu=0,tool=0
+        move P,spd=_plasma[1].speed,accu=0,tool=0
         ```
 
-
-  - _plasma.kerf
-    - 용도 : 절삭폭을 고려한 로봇의 쉬프트 모션 명령을 사용자가 쉽게 편집하도록 함
-    - 작동 : `plasma on,cnd=1` 명령어의 조건 번호에 설정된 절삭폭 보정량을 해당 시스템 변수로 가져옴
-    - 사용법 : `move`문의 목표 위치 작성시 해당 시스템 변수를 사용함 (mm)
-    - 사용 예제
+  - `_plasma[cnd#].kerf`
+    - Purpose: Makes it easy to program robot shift motion that compensates for the kerf width.
+    - Operation: Retrieves the kerf compensation value configured for the specified cutting condition number.
+    - Usage: Use this system variable when defining the target position of a `move` statement (mm).
+    - Example
         ```python
         plasma on,cnd=1
         var sft
-        sft=Shift(0,_plasma.kerf,0,0,0,0,"tool")
-        move P,tg=po1+sft,spd=_plasma.speed,accu=0,tool=0
+        sft=Shift(0,_plasma[1].kerf,0,0,0,0,"tool")
+        move P,tg=po1+sft,spd=_plasma[1].speed,accu=0,tool=0
         ```
+
+  - `_plasma[cnd#].cutting_height`
+    - Purpose: Makes it easy to enter the cutting position during teaching.
+    - Operation: Retrieves the cutting height configured for the specified cutting condition number.
+    - Usage: Use this system variable when defining the target position of a `move` statement (mm).
+    - Example
+        ```python
+        var cut_hgt=_plasma[1].cutting_height
+        var sft_height=Shift(0,0,-cut_hgt,0,0,0,"tool")
+        move P,tg=po_cut_srt+sft_height,spd=cut_spd*0.5mm/sec,accu=0,tool=0
+        ```
+
+  - `_plasma[cnd#].torch_angle`
+    - Purpose: Makes it easy to enter the torch angle required for gouging in a job program.
+    - Operation: Retrieves the gouging torch angle configured for the specified cutting condition number.
+    - Usage: Use this system variable when setting the torch orientation for gouging (deg).
+    - Example
+        ```python
+        var gouging_angle=_plasma[1].torch_angle
+        ```
+
+  - `_plasma[cnd#].motion_delay`
+    - Purpose: Makes it easy to enter the required wait time at the end of gouging in a job program.
+    - Operation: Retrieves the gouging end delay configured for the specified cutting condition number.
+    - Usage: Use this system variable as the wait time of the `plasma off` command at the end of gouging (sec).
+    - Example
+        ```python
+        plasma off,wait=_plasma[1].motion_delay
+        ```
+
 [__SOURCE](2-application/4-programming/2-cmd.md)
-## 2.4.2 plasma on/off 명령어
+## 2.4.2 plasma on/off Command
 
-   - 지정된 높이로 이동하고 플라즈마 아크를 시작하거나 종료함
-   - 문법
-       
-        ```python  
-        plasma on/off,cnd=<조건번호>,wait=<대기시간>
+   - Moves the torch to the specified height and starts or stops the plasma arc.
+   - Syntax
+
+        ```python
+        plasma on/off,cnd=<condition number>,wait=<wait time>
         ```
-    
-   - 파라미터
-    
-        |항목 |입력 |기능 |
+
+   - Parameters
+
+        |Item|Input|Function|
         |:--:|:--:|:--:|
-        |플라즈마 시작|on|설정 높이로 이동 및 아크 시작|
-        |플라즈마 종료|off| 설정 대기 시간 후 아크 종료|
-        |조건 번호|1~1024|절단 조건 지정|
-        |대기시간|0~30초|절단 제어기 준비 대기|
+        |Plasma start|on|Moves to the configured height and starts the arc|
+        |Plasma stop|off|Stops the arc after the specified delay|
+        |Condition number|1-1024|Specifies the cutting condition|
+        |Wait time|0-30 sec|Specifies the cutting controller wait time|
 
-   - 사용 예제
+   - Example
 
-        ```python  
+        ```python
         plasma on,cnd=1
-        move P,spd=_plasma.speed,accu=0,tool=0
+        move P,spd=_plasma[1].speed,accu=0,tool=0
         plasma off,cnd=1
         ```
-    
 
-   <Br>
+   <br>
 
-   ### 상세 기능 절차
+   ### Detailed Sequence
    ---
-   `plasma on` 명령어 수행 시 내부적으로 진행되는 절차들을 설명합니다. 해당 명령어는 플라즈마 아크를 on 시키는 기능 뿐만 아니라, 토치를 조건에 설정된 높이로 이동시키며 천공(piercing)까지 수행한 후 절단 이송을 대기하는 상태까지 수행합니다.
+   The following describes the internal sequence performed by the `plasma on` command. In addition to turning on the plasma arc, the command moves the torch to the heights specified by the condition, performs piercing, and then waits in a state ready for cutting travel.
 
-   (1) 프로세스 ID 확인  
-   'cnd=#' 에 입력된 조건 번호와 절단기에 설정된 조건번호를 확인합니다. 만약 다르다면, 프로세스 ID 전송을 먼저 수행해야합니다.
+   (1) Checking the Process ID  
+   The system compares the condition number entered as `cnd=#` with the condition set in the plasma cutting system. If they differ, send the process ID first.
 
-   (2) 로봇 이동과 아크 ON  
-   `plasma on` 명령어의 시작은 항상 부재와 접촉 위치입니다. 이후 명령어를 실행하면 로봇의 이동은 절단 시작 방식에 따라서 각기 달라집니다. 절단 차트(cut chart)는 프로세스 ID 별로 모든 높이와 대기 시간 정보를 정의하고 있습니다.
-   
+   (2) Robot Motion and Arc ON  
+   The `plasma on` command must always start with the torch at the workpiece contact position. After the command is executed, robot motion differs according to the cutting start method. The cut chart defines all heights and wait times for each process ID.
 
-   - 천공(piercing) 방식  
-   부재의 내부 면에서 절단을 시작하므로 천공(piercing) 작업이 먼저 선행되어야 합니다. 플라즈마 아크를 안정화 하기 위한 추가적인 높이 이동 후에 절단을 시작 할 수 있습니다.
+   - Piercing start  
+   Because cutting starts inside the workpiece, piercing must be performed first. Cutting can begin after additional height movements that stabilize the plasma arc.
 
-     ![그림2.11 천공 타입의 로봇 이동 절차](../../_assets/pierce_start.png)
+     ![Figure 2.12 Robot motion sequence for piercing start](../../_assets/pierce_start.png)
 
-     - 점화 높이(ignition height) 이동 : 전이 높이(transfer height)가 점화 높이에 해당함
-     - 아크 ON : 플라즈마 아크를 발생시킴
-     - 천공 높이(piercing height) 이동 : 아크가 안정화 되고 본격적인 천공을 시작함
-     - 천공 대기(piercing delay) : 천공 완료까지 대기함
-     - 모션 신호 확인 : 로봇 이동 신호(machine motion) 신호를 확인함
-     - 절단 높이(cutting height) 이동 : 절단 가능 높이로 이동하여 절단을 시작함
+     - Move to ignition height: The transfer height is used as the ignition height.
+     - Arc ON: Generates the plasma arc.
+     - Move to pierce height: Starts full piercing after the arc stabilizes.
+     - Pierce delay: Waits until piercing is complete.
+     - Check motion signal: Checks the Machine Motion signal.
+     - Move to cutting height: Moves to the cutting height and starts cutting.
 
+   - Edge start  
+     Because cutting starts at the edge or corner of the workpiece, no piercing process is required. The torch moves directly to the cutting height and starts ignition. Cutting motion can begin after the plasma arc has stabilized.
 
-   - 에지(edge) 방식  
-     부재의 에지(edge, 모서리)에서 절단을 시작하므로, 천공 과정이 불필요합니다. 절단 높이로 바로 이동하여 점화를 시작하고 플라즈마 아크가 안전화 되고 나면 절단 모션을 수행 할 수 있습니다.  
-     
-     ![그림2.12 에지 타입의 로봇 이동 절차](../../_assets/edge_start.png)
+     ![Figure 2.13 Robot motion sequence for edge start](../../_assets/edge_start.png)
 
-     - 점화 높이(ignition height) 이동 : 절단 높이가 점화 높이에 해당함
-     - 아크 ON : 플라즈마 아크를 발생시킴
-     - 대기 : 아크가 안정화 되도록 대기함
-   
-   
-   
-   
-
-
+     - Move to ignition height: The cutting height is used as the ignition height.
+     - Arc ON: Generates the plasma arc.
+     - Wait: Waits for the arc to stabilize.
 
 [__SOURCE](2-application/4-programming/3-prog-structure.md)
-## 2.4.3 프로그램 기본 구조
+## 2.4.3 Basic Program Structure
 
-절단을 위한 잡(job) 프로그램은 일반적으로 다음과 같은 순서로 구성됩니다.
+A cutting job program generally consists of the following sequence.
 
- (1) 접근 (Approach)  
-    로봇이 대기 위치에서 작업 시작점(Safe Point)으로 이동
+ (1) Approach  
+ Move the robot from the standby position to the safe point near the work start position.
 
- (2) 터치 센싱  
- 토치가 모재 표면을 감지하여 정확한 시작 높이를 설정 (IHS, Initial Height Sensing)
+ (2) Touch Sensing  
+ Detect the workpiece surface with the torch to establish the correct start height (IHS, Initial Height Sensing).
 
  (3) plasma on  
- 절단 위치로 이동, 플라즈마 on, 절단 이송 준비 완료
- 
+ Move to the cutting position, turn on the plasma, and prepare for cutting travel.
+  * Reference manual  
+  [`touchsen` statement](https://hrbook-hrc.web.app/#/view/doc-arc-weld/en/2_Command/13_touchsen?cont_model=${cont_model})
+
  (4) heightsen on  
- 전압 피드백을 이용한 높이 제어 수행
+ Perform height control using voltage feedback.
+  * Reference manual  
+  [Height sensing](https://hrbook-hrc.web.app/#/view/doc-arc-weld/en/8_Application_function/4_Height_sensing/README?cont_model=${cont_model})  
+  [`heightsen on` statement](https://hrbook-hrc.web.app/#/view/doc-arc-weld/en/2_Command/9_hsenson?cont_model=${cont_model})
 
- (5) 리드인 (Lead-in)  
- 제품 외곽선에서 실제 절단 라인으로 부드럽게 진입 (필요시)
+ (5) Lead-in  
+ Enter the actual cutting line smoothly from outside the product profile, if required.
 
- (6) 절단 (Cutting)  
- 설정된 속도와 전압(THC)을 유지하며 제품 형상을 따라 이동
+ (6) Cutting  
+ Follow the product profile while maintaining the configured speed and voltage (THC).
 
- (7) 리드아웃 (Lead-out)  
- 절단 종료 시 자국이 남지 않도록 퇴피(필요시)
+ (7) Lead-out  
+ Move away from the profile at the end of cutting to avoid leaving a mark, if required.
 
  (8) heightsen off  
- 높이 제어 종료
+ Stop height control.
+  * Reference manual  
+  [`heightsen off` statement](https://hrbook-hrc.web.app/#/view/doc-arc-weld/en/2_Command/10_hsensoff?cont_model=${cont_model})
 
  (9) plasma off  
-  플라즈마 오프
- 
- (10) 복귀 (Retract)  
- 다음 절단 위치나 대기 위치로 상승 이동
+ Turn off the plasma arc.
 
+ (10) Retract  
+ Move upward to the next cutting position or standby position.
 
-
-
-{% hint style="warning" %}  
-부재의 높이가 일정하여 터치 센싱이 불필요한 경우, 터치센싱을 생략할 수 있습니다. 그러나 `plasma on` 은 항상 부재와 접촉한 지점에서 수행하여야 합니다. 따라서, 터칭 위치 포즈로 먼저 이동 후 `plasma on`을 수행하시기 바랍니다.
+{% hint style="warning" %}
+If the workpiece height is uniform and touch sensing is not required, touch sensing may be omitted. However, `plasma on` must always be executed at the workpiece contact position. Move to the taught contact pose before executing `plasma on`.
 
 ```python
-move P1    # 터치 위치로 이동 (P1, touchsen 에서 저장된 전역변수)
+move P1    # Move to the contact position (P1: global variable saved by touchsen)
 plasma on,cnd=1
 ```
 {% endhint %}
 
-### 프로그램 예제
+### Program Example
 
 ```python
-
-_plasma.process_id = 1000               # 프로세스 id 전송
-move                                    # 시작 위치
-move                                    # 판재 근접 위치		
-touchsen, P1                            # 부재 위치 확인
-plasma on,cnd=1                         # 플라즈마 아크 출력
-heightsen on                            # 높이 제어 시작
-move P,spd=_plasma.speed,accu=0,tool=0  # 절단 시작
+_plasma.process_id = 1000                  # Send process ID
+move                                       # Start position
+move                                       # Position near the plate
+touchsen, P1                               # Detect the workpiece position
+plasma on,cnd=1                            # Turn on the plasma arc
+heightsen on                               # Start height control
+move P,spd=_plasma[1].speed,accu=0,tool=0 # Start cutting
 ...
-heightsen off                           # 높이 제어 종료
-plasma off,cnd=1                        # 플라즈마 아크 정지
-
-move                                    # 복귀 위치
+heightsen off                              # Stop height control
+plasma off                                 # Stop the plasma arc
+move                                       # Return position
 ```
 
 [__SOURCE](3-workflow/README.md)
-# 3. 작업 절차
+# 3. Work Procedure
+
 [__SOURCE](3-workflow/1-scenario.md)
-# 3.1 설정 순서
+# 3.1 Setup Sequence
 
-절단작업은 통신 개통, 아크 범용 용접기 선택, 조건 편집, 프로그램 작성 등의 순서로 진행합니다. 초기 설정 시에만 필요한 설정을 제외하면, 이후부터는  조건 편집과 프로그램 작성만으로 작업이 가능합니다.  
+The cutting operation is prepared in the following order: establish communication, select the General Arc Welder, edit conditions, and create the program. After the initial settings are complete, subsequent operations require only condition editing and program creation.
 
-플라즈마 절단 작업에서 특별히 주의해야 할 부분은 프로세스 아이디의(process ID) 선택입니다. 플라즈마 절단기와 로봇제어기는 재질, 두께, 품질 등에 맞는 절단 상황별 절단 차트를(cut chart) 공유하고 있습니다. 사용자는 작업 환경에 따라 해당 프로세스 아이디를 선택하여야 합니다. 본 절단 기능은 부재의 종류를 연강(mild steel)로 한정하고 있으므로 두께 기준으로 절단 차트를 분류하여 절단 조건을제공하고 있습니다. 절단 부재 두께마다 나열된 하나 또는 소수의 프로세스 ID 중 선택하시면 됩니다. 선택 후에는 전류, 전압, 속도 등 작업 조건이 자동으로 표시됩니다. 일부 조건에 대해서는 사용자가 기존 절단 차트 정보를 수정할 수 있고 `plasma on` 명령어 수행시 절단기로 전송되어 반영됩니다. 프로세스 아이디가 동일한 경우에는 전송과정을(_plasma.process_ID) 생략할 수 있으나, 절단기에 설정된 ID와 `plasma on` 시에 절단 조건으로 전송되는 ID가(조건번호 편집창의 ID) 다르면 ID 불일치 에러로 처리됩니다.
-
-
+Special care must be taken when selecting the process ID. The plasma cutting system and robot controller share a cut chart that contains cutting conditions for different materials, thicknesses, and quality requirements. Select the appropriate process ID for the work environment. Because this cutting function is limited to mild steel, cutting conditions are classified by workpiece thickness. Select one of the process IDs listed for the workpiece thickness. After an ID is selected, operating conditions such as current, voltage, and speed are displayed automatically. Some values in the cut chart can be edited by the user and are sent to the plasma cutting system when the `plasma on` command is executed. If the same process ID is already set, sending `_plasma.process_id` may be omitted. However, if the ID set in the plasma cutting system differs from the ID of the condition specified by `plasma on`, a process ID mismatch error occurs.
 
 <br>
 
-| 순서|  내용 | 비고|
+|Step|Description|Remarks|
 |:--:|:--:|:--:|
-| 1|  이더캣 통신 설정 | 산업용 통신 설정 참고|
-| 2|  아크 용접기 선택  <br> (터치센싱 설정용) | 아크 용접기 설정 참고|
-| 3|  Accuracy 설정 | 레벨 0 : 툴 끝위치 0mm/ 자세 0deg  <br> (부재-토치 거리, 수 mm 이내 고려)|
-| 4|  플라즈마 절단 응용 조건 설정 | 부재 두께 입력 |
-| 5|  두께에 맞는 프로세스 ID 선택 | ID 선택시 디폴트 조건 설정됨 <br> 특정항목 제외, 수정 가능|
-| 6|  티칭 및 작업 프로그램 작성 <br> - _plasma.process_id <br> - touchsen <br> - plasma on  <br> - heightsen <br>  - move <br> - plasma off | '2.3 로봇 프로그래밍' 참고|
-| 7|  작업 버튼 on | 작업 중 on 상태 유지 |
-| 8|  자동 운전 | 절단 작업 수행 |
-| 9|  상태 모니터링  | 중요 데이터의 실시간 갱신|
-| 10|  작업 종료  | 절단 품질 확인|
+|1|Configure EtherCAT communication|Refer to the Industrial Communication settings|
+|2|Select the arc welder<br>(for touch-sensing setup)|Refer to Arc Welder Settings|
+|3|Set Accuracy|Level 0: tool-end position 0 mm / orientation 0 deg<br>(consider the workpiece-to-torch distance of several millimeters or less)|
+|4|Configure plasma cutting application conditions|Enter the workpiece thickness|
+|5|Select the process ID for the thickness|Default conditions are set when an ID is selected<br>All but certain items can be edited|
+|6|Teach and create the job program<br>- `_plasma.process_id`<br>- `touchsen`<br>- `plasma on`<br>- `heightsen`<br>- `move`<br>- `plasma off`|Refer to Section 2.4, Robot Programming|
+|7|Turn the Work button ON|Keep it ON during operation|
+|8|Start automatic operation|Perform cutting|
+|9|Monitor status|Important data is updated in real time|
+|10|Complete the operation|Check cutting quality|
 
+<br>
 
-
-
+![Figure 3.1 Signal I/O and operation sequence between the plasma cutting system and controller](../_assets/interaction.png)
 
 [__SOURCE](3-workflow/2-implement.md)
-# 3.2 절단 작업 실행
+# 3.2 Executing Cutting
 
-
-
-모든 기본 설정과 티칭이 완료된 상태에서는  아래 작성만 반복하면 절단 작업을 수행할 수 있습니다.
-
-
+After all basic settings and teaching are complete, repeat the following procedure to perform cutting operations.
 
 <br>
 
-| 순서|  내용 | 비고|
+|Step|Description|Remarks|
 |:--:|:--:|:--:|
-| 1|  로봇 제어기, 절단기 전원 on| 통신 상태 확인|
-| 2|  작업 버튼 on |  |
-| 3|  모니터링 화면의 상태값 확인 | 통신 및 절단기 정상 유무 확인  |
-| 4|  모터 on | 운전 준비|
-| 5|  자동 운전 | |
-| 6|  상태 모니터링  | 중요 데이터의 실시간 갱신 확인|
+|1|Turn on the robot controller and plasma cutting system|Check communication status|
+|2|Turn the Work button ON||
+|3|Check the values on the monitoring screen|Verify communication and plasma cutting system status|
+|4|Turn the motors ON|Prepare for operation|
+|5|Start automatic operation||
+|6|Monitor status|Verify that important data is updated in real time|
+
 [__SOURCE](4-additional/README.md)
-# 4. 추가 기능
+# 4. Additional Functions
+
 [__SOURCE](4-additional/1-manualout.md)
-# 4.1 가스 수동 출력
+# 4.1 Manual Gas Output
 
-
-
-본 기능은 실제 절단 공정을 시작하기 전, 가스 공급 라인의 상태를 점검하거나 절단 조건에 맞는 가스 압력 및 유량을 확인하기 위해 사용합니다. 로봇 제어기의 인터페이스 또는 하이퍼썸 가스 콘솔을 통해 수동으로 각 단계의 가스를 분출할 수 있습니다.
+Use this function before starting an actual cutting operation to check the gas supply lines and verify that gas pressure and flow match the cutting conditions. Each gas stage can be activated manually through the robot controller interface or Hypertherm gas console.
 
 <br>
 
-![그림4.1 가스 수동 출력 버튼](../_assets/test_button.png)
+![Figure 4.1 Manual gas output buttons](../_assets/test_button.png)
 
 <br>
 
-(1) 프리플로우 (Pre-flow) 수동 출력  
-  - 정의: 플라즈마 아크가 발생하기 직전, 토치 내부의 공기를 밀어내고 안정적인 점화를 위해 공급되는 예비 가스 흐름입니다.  
-  - 사용 목적: 절단 시작 전 가스 라인 내의 불순물이나 수분을 제거(Purge)할 때 사용합니다.  초기 점화 가스(예: 질소 또는 공기)의 압력이 설정치에 도달하는지 확인합니다.  
-  - 매뉴얼 버튼 조작: 'Pre-flow Test' 버튼을 ON으로 유지하면 설정된 시간 동안 가스가 분출됩니다.
+(1) Manual Pre-flow Output  
+  - Definition: A preliminary gas flow supplied immediately before the plasma arc starts. It purges air from inside the torch and helps ensure stable ignition.  
+  - Purpose: Used to purge contaminants or moisture from the gas line before cutting. It also verifies that the pressure of the initial ignition gas, such as nitrogen or air, reaches the set value.  
+  - Button operation: Turn the `Pre-flow Test` button ON to discharge gas.
 
-(2) 컷플로우 (Cut-flow) 수동 출력    
-  - 정의: 실제 절단이 진행되는 동안 고에너지 플라즈마 아크를 형성하고 용융된 금속을 불어내는 주 절단 가스 흐름입니다.  
-  - 사용 목적: 최종 절단 품질을 결정하는 주 가스의 압력과 유량이 설정된 절단 도표(Cut Chart)와 일치하는지 확인합니다. 장시간 절단 시 가스 공급 장치(탱크 등)의 유량 공급 능력을 테스트합니다.  
-  - 매뉴얼 버튼 조작: 'Cut-flow Test' 버튼을 ON으로 유지하면 설정된 시간 동안 가스가 분출됩니다.
+(2) Manual Cut-flow Output  
+  - Definition: The main cutting-gas flow that forms the high-energy plasma arc and blows away molten metal during cutting.  
+  - Purpose: Verifies that the pressure and flow of the main gas, which determines final cut quality, match the cut chart. It can also test the flow capacity of the gas supply equipment, such as a tank, for long cutting operations.  
+  - Button operation: Turn the `Cut-flow Test` button ON to discharge gas.
 
-(3) 피어스플로우 (Pierce-flow) 수동 출력  
-  - 정의: 모재에 구멍을 뚫는(피어싱) 순간, 토치의 소모품을 보호하고 용융 금속의 비산을 제어하기 위해 공급되는 가스 흐름입니다.  
-  - 사용 목적: 두꺼운 판재 절단 시 피어싱 압력이 충분한지 사전에 점검합니다.  피어싱 단계에서 가스 압력 급변으로 인한 소모품 손상 여부를 확인합니다.  
-  - 매뉴얼 버튼 조작: 'Pierce Test' 버튼을 ON으로 유지하면 피어싱을 수행합니다.
+(3) Manual Pierce-flow Output  
+  - Definition: Gas supplied at the moment the workpiece is pierced to protect torch consumables and control molten-metal spatter.  
+  - Purpose: Checks in advance whether sufficient piercing pressure is available when cutting thick plate. It also helps identify possible consumable damage caused by sudden gas-pressure changes during piercing.  
+  - Button operation: Turn the `Pierce Test` button ON to output pierce-flow gas.
 
+<br>
+
+{% hint style="info" %}
+- Each button operates as a toggle. Its ON/OFF state is maintained after it is pressed.
+- The three manual output buttons cannot be enabled simultaneously.
+- After a test is selected, plasma pressures A and B and shield pressure S are displayed in the button area (unit: psi).
+{% endhint %}
 
 [__SOURCE](4-additional/2-monitoring.md)
-# 4.2 모니터링
+# 4.2 Monitoring
 
+To verify cutting-process stability and equipment status, the system sends internal power-supply data to the robot controller in real time. This lets the operator immediately identify abnormal equipment conditions and monitor the cutting operation.
 
-본 시스템은 절단 공정의 안정성과 장비의 상태를 확인하기 위해 전원 장치의 내부 데이터를 실시간으로 로봇 제어기에 전달합니다. 작업자는 이를 통해 장비의 이상 유무를 즉각 파악하고 절단 상황을 점검할 수 있습니다.
-
-아래 버튼 경로를 통해 플라즈마 절단 기능의 패널(panel) 모니터링을 선택합니다.  
-`[창조정] - [F1: 선택] - 플라즈마 절단`
-
+Use the following menu path to select the plasma cutting monitoring panel:  
+`[Window Control] - [F1: Select] - Plasma Cutting`
 
 <br>
 
-![그림4.2 모니터링 화면](../_assets/monitoring.png)
+![Figure 4.2 Monitoring screen](../_assets/monitoring.png)
 
 <br>
 
-|항목|의미|상태|
+|Item|Description|State|
 |:--:|:--:|:--:|
-|머신 모션 <br> (machine motion)|천공 완료 후 절단 모드 가능 상태|on/off|
-|시작준비완료 <br> (ready for start)|ID 입력 완료 상태|on/off|
-|에러 <br> (error / code)|에러 상태 및 에러 코드|'-'(에러없음) / <br> 에러 코드|
-|공정준비완료 <br> (process ready)|ID 설정 유무|on/off|
-|오믹 접촉 <br> (ohmic contact)|토치의 부재 접촉 상태|on/off|
-|원격전원상태 <br> (remote power status)|절단기의 전원 상태|on/off|
-|전압 (voltage)|전압값(V)|~ V|
-|전류 (current)|전류값(A)|~ A|
-|프로세스ID (process ID)|절단기의 설정 프로세스 ID|#|
-|토치간격 (stand-off)|토치-부재간 거리| mm |
-
+|Machine Motion|Cutting motion is permitted after piercing is complete|on/off|
+|Ready for Start|Process ID setup is complete|on/off|
+|Error / Code|Error state and error code|`-` (no error) /<br>error code|
+|Process Ready|Indicates whether a process ID is set|on/off|
+|Ohmic Contact|Torch contact with the workpiece|on/off|
+|Remote Power Status|Power state of the plasma cutting system|on/off|
+|Voltage|Voltage value (V)|~ V|
+|Current|Current value (A)|~ A|
+|Process ID|Process ID set in the plasma cutting system|#|
+|Stand-off|Distance between the torch and workpiece|mm|
 
 [__SOURCE](4-additional/3-checkplay.md)
-# 4.3 확인운전
+# 4.3 Test Run
+
+For ease of operation, the system provides an operation mode that performs actual cutting and a test mode that does not output a plasma arc.
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center;">Item</th>
+      <th style="text-align: center;">Operation Mode</th>
+      <th style="text-align: center;">Test Mode</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center">Function</td>
+      <td align="center">Performs actual cutting, marking, or gouging</td>
+      <td align="center">Dry run</td>
+    </tr>
+    <tr>
+      <td align="center">Setting</td>
+      <td align="center">Automatic operation &amp; gun key ON</td>
+      <td align="center">Not in operation mode</td>
+    </tr>
+    <tr>
+      <td align="center">Output signals</td>
+      <td align="center">Arc ON, Pierce ON</td>
+      <td align="center">-</td>
+    </tr>
+    <tr>
+      <td align="center" rowspan="3">Conditions</td>
+      <td align="center">Plasma cutting system process ID set: O</td>
+      <td align="center">Plasma cutting system process ID set: O</td>
+    </tr>
+    <tr>
+      <td align="center">Cutting condition process ID match: O</td>
+      <td align="center">Cutting condition process ID match: O</td>
+    </tr>
+    <tr>
+      <td align="center">Ready for Start: O</td>
+      <td align="center">Ready for Start: X</td>
+    </tr>
+    <tr>
+      <td align="center">Wait</td>
+      <td align="center">Machine Motion signal: O</td>
+      <td align="center">Machine Motion signal: X</td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+{% hint style="warning" %}
+- If any condition in the Conditions row above is not satisfied, the corresponding error occurs.
+- After outputting the arc, the `plasma on` command waits for the Machine Motion signal. If this signal is not received within the specified time, the plasma cutting system reports an error.
+{% endhint %}
+
 [__SOURCE](5-error/README.md)
-# 5. 경고/에러
+# 5. Warnings and Errors
+
+This chapter describes the main errors that may occur while using the plasma cutting function and explains how to correct them.
+
+## Error List
+
+|Type|Number|Error Name|Description|Corrective Action|
+|:--:|:--:|:--|:--|:--|
+|Error|E1563|Process ID Mismatch|The process ID currently set in the plasma cutting system does not match the process ID in the cutting condition.|Set the plasma cutting system process ID to the same ID as the cutting condition.|
+|Error|E1564|Waiting for Plasma Cutting System Ready|The `plasma on` command cannot be executed because the plasma cutting system is not ready to start.|Set the process ID, and then verify that the Ready for Start signal is received from the plasma cutting system.|
+|Error|E1565|Plasma Cutting System Process ID Not Set|A process ID has not been set in the plasma cutting system, or the set value is invalid.|Set a process ID appropriate for the cutting condition in the plasma cutting system.|
+|Error|E1566|Plasma Cutting System EtherCAT Communication Failure|The plasma cutting slave cannot be found, or an EtherCAT SDO communication error occurred while sending cutting conditions.|Check the EtherCAT slave-node settings, cable connections, and communication status, and then retry.|
+|Error|E1567|Hypertherm Plasma Cutting System Internal Error|An internal error signal was received from the Hypertherm plasma cutting system. The detailed error number sent by the plasma cutting system is displayed as `ErrCode`.|Check the displayed `ErrCode` and correct the error according to the Hypertherm plasma cutting system manual.|
+
+<br>
+
+{% hint style="info" %}
+The `ErrCode` displayed with E1567 is the detailed error number received from the plasma cutting system, not an error number generated by the robot controller.
+{% endhint %}

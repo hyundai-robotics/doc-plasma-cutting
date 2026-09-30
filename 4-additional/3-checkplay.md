@@ -1,57 +1,55 @@
-﻿# 4.3 확인운전
+# 4.3 Test Run
 
-작업의 편의성을 위해 실제 절단을 수행하는 실행모드와 플라즈마 아크를 출력하지 않는 테스트 모드를 제공합니다.
+For ease of operation, the system provides an operation mode that performs actual cutting and a test mode that does not output a plasma arc.
 
 <table>
   <thead>
     <tr>
-      <th style="text-align: center;">항목</th>
-      <th style="text-align: center;">실행 모드</th>
-      <th style="text-align: center;">테스트 모드</th>
+      <th style="text-align: center;">Item</th>
+      <th style="text-align: center;">Operation Mode</th>
+      <th style="text-align: center;">Test Mode</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td align="center">기능</td>
-      <td align="center">실제 절단, 마킹, 가우징 수행</td>
-      <td align="center">드라이 런(dry run)</td>
+      <td align="center">Function</td>
+      <td align="center">Performs actual cutting, marking, or gouging</td>
+      <td align="center">Dry run</td>
     </tr>
     <tr>
-      <td align="center">설정</td>
-      <td align="center">자동실행 &amp; 건키 ON</td>
-      <td align="center">Not 실행모드</td>
+      <td align="center">Setting</td>
+      <td align="center">Automatic operation &amp; gun key ON</td>
+      <td align="center">Not in operation mode</td>
     </tr>
     <tr>
-      <td align="center">출력 신호</td>
-      <td align="center">아크 ON, 피어싱 ON</td>
+      <td align="center">Output signals</td>
+      <td align="center">Arc ON, Pierce ON</td>
       <td align="center">-</td>
     </tr>
     <tr>
-      <td align="center" rowspan="3">조건</td>
-      <td align="center">절단기 프로세스ID 설정 O</td>
-      <td align="center">절단기 프로세스ID 설정 O</td>
+      <td align="center" rowspan="3">Conditions</td>
+      <td align="center">Plasma cutting system process ID set: O</td>
+      <td align="center">Plasma cutting system process ID set: O</td>
     </tr>
     <tr>
-      <td align="center">절단조건 프로세스 ID 일치 O</td>
-      <td align="center">절단조건 프로세스 ID 일치 O</td>
+      <td align="center">Cutting condition process ID match: O</td>
+      <td align="center">Cutting condition process ID match: O</td>
     </tr>
     <tr>
-      <td align="center">시작준비완료 O</td>
-      <td align="center">시작준비완료 X</td>
+      <td align="center">Ready for Start: O</td>
+      <td align="center">Ready for Start: X</td>
     </tr>
     <tr>
-      <td align="center">대기</td>
-      <td align="center">로봇모션신호 O</td>
-      <td align="center">로봇모션신호 X</td>
+      <td align="center">Wait</td>
+      <td align="center">Machine Motion signal: O</td>
+      <td align="center">Machine Motion signal: X</td>
     </tr>
   </tbody>
 </table>
 
-
 <br>
 
-{% hint style="warning" %}  
-    - 상기 표의 '조건' 항목이 만족되지 않으면 해당 에러가 발생합니다.  
-    - `plasma on` 명령어는 아크 출력 후 로봇모션신호를 대기하며 일정 시간 입력되지 않으면 절단기에서 에러를 송출합니다.
-
+{% hint style="warning" %}
+- If any condition in the Conditions row above is not satisfied, the corresponding error occurs.
+- After outputting the arc, the `plasma on` command waits for the Machine Motion signal. If this signal is not received within the specified time, the plasma cutting system reports an error.
 {% endhint %}

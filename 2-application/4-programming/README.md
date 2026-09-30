@@ -1,4 +1,3 @@
-﻿# 2.4 로봇 프로그래밍
+# 2.4 Robot Programming
 
-
-로봇 절단 잡(Job) 프로그램은 단순히 로봇의 이동 경로(Path)만을 정의하는 것이 아니라, 하이퍼썸 전원 장치와의 실시간 통신을 통해 절단 파라미터를 동기화하는 일련의 시퀀스를 포함합니다.
+A robot cutting job program defines not only the robot motion path, but also a sequence that synchronizes cutting parameters through real-time communication with the Hypertherm power supply.

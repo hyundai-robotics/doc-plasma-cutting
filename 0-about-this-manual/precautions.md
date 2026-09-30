@@ -1,3 +1,3 @@
-﻿# 사전 주의사항
+# Safety Precautions
 
-{% include file="ko/precautions.md" %}
+{% include file="en/precautions.md" %}

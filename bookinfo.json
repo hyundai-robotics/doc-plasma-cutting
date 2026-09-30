@@ -1,15 +1,15 @@
 ﻿{
-    "langCode": "ko",
-    "series": "${cont_model} 제어기",
-    "title": "기능설명서 - 플라즈마 절단",
-    "publisher": "HD현대로보틱스",
-    "tocTitle": "목차",
+    "langCode": "en",
+    "series": "${cont_model} Controller",
+    "title": "Function Manual - Plasma Cutting",
+    "publisher": "HD Hyundai Robotics",
+    "tocTitle": "Table of Contents",
     "tocTitleElements": "[ \"h1\", \"h2\" ]",
-    "docId": "${cont_model:upper}PLASMACUT_KO_001",
+    "docId": "${cont_model:upper}PLASMACUT_EN_001",
     "references": [
         { 
-            "title": "${cont_model} 제어기 조작 설명서 - TP630",
-            "id": "${cont_model:upper}OPTP630_KO"
+            "title": "${cont_model} Controller Operation Manual - TP630",
+            "id": "${cont_model:upper}OPTP630_EN"
         }
     ]
 } 

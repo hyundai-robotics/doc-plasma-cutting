@@ -1,3 +1,3 @@
-﻿# 1. 개요
+# 1. Overview
 
-플라즈마 절단의 기본 개념과 현대 로보틱스의 플라즈마 절단 시스템 구성도를 설명합니다.
+This chapter explains the basic concepts of plasma cutting and the configuration of the HD Hyundai Robotics plasma cutting system.

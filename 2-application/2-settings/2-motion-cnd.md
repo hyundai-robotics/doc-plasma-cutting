@@ -1,36 +1,33 @@
-﻿## 2.2.2 모션 조건
+## 2.2.2 Motion Conditions
 
-![그림2.8 모션 조건](../../_assets/motion_cnd.png)
+![Figure 2.8 Motion conditions](../../_assets/motion_cnd.png)
 
-(1) 시작 타입  
-부재면 내에서 천공(piercing)을 하면서 시작하는 타입과 에지에서 천공없이 절단을 시작하는 타입으로 구분합니다.
+(1) Start Type  
+Select either piercing start, which starts by piercing inside the workpiece, or edge start, which begins cutting at an edge without piercing.
 
-(2) 천공 속도  
-천공 높이로 (pierce height) 이동할때 사용하는 속도입니다.
+(2) Piercing Speed  
+The speed used to move to the piercing height.
 
-(3) 절단 속도  
-절단 높이로 (cutting height) 이동할때 사용하는 속도입니다.
+(3) Cutting Speed  
+The speed used to move to the cutting height.
 
-(4) 트랜스퍼 높이 (transfer height)  
-아크 트랜스퍼를 위한 높이 설정입니다.
+(4) Transfer Height  
+Sets the height used for arc transfer.
 
-(5) 천공 높이 (pierce height)  
-천공 시작을 위한 높이 설정입니다.
+(5) Pierce Height  
+Sets the height at which piercing starts.
 
-(6) 절단 높이 (transfer height)  
-천공 이후 절단 이송을 시작하기 위한 높이 설정입니다.
+(6) Cutting Height  
+Sets the height at which cutting travel begins after piercing.
 
+(7) Kerf Compensation  
+A path compensation value that accounts for the width of material removed by the plasma arc. Use one-half of the kerf width shown in the cut chart directly as the path correction value.
 
-(7) 절삭폭 보정 (kerf compensation)  
-아크 형상의 폭 길이 만큼 부재가 절삭되는 것을 고려하여 절삭 경로를 수정하기 위한 경로 보정값입니다. 절단 차트에 표시된 절삭폭의 1/2 값입니다. 경로 수정에 그대로 사용하시면 됩니다.
+(8) Torch Angle  
+Sets the torch tilt angle relative to the workpiece during gouging. This value is available to job programs through the `_plasma[cnd#].torch_angle` system variable.
 
-(8) 토치 각도 (torch angle)  
-가우징 작업 시 부재에 대한 토치의 기울기 각도를 설정합니다. 설정값은 `_plasma[cnd#].torch_angle` 시스템 변수로 잡 프로그램에서 사용할 수 있습니다.
+(9) Motion Delay  
+Sets the time to wait while maintaining the arc at the end of gouging. This value is available to job programs through the `_plasma[cnd#].motion_delay` system variable.
 
-(9) 모션 대기시간 (motion delay)  
-가우징 종료 시 아크를 유지한 상태로 대기하는 시간을 설정합니다. 설정값은 `_plasma[cnd#].motion_delay` 시스템 변수로 잡 프로그램에서 사용할 수 있습니다.
-
-(10) 모션 좌표계 (motion coordinate system)  
-가우징 시 토치 각도를 고려하여 절단 높이까지 이동할 때 기준으로 사용할 사용자 좌표계를 설정합니다. 툴 방향이 아닌 설정된 사용자 좌표계 방향으로 이동하여 절단 높이를 확보합니다.
-
-
+(10) Motion Coordinate System  
+Sets the user coordinate system used as the reference when moving to the cutting height during gouging. To account for the torch angle, the torch moves to the cutting height along the selected user-coordinate direction rather than the tool direction.

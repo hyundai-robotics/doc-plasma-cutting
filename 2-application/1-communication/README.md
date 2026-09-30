@@ -1,3 +1,3 @@
-﻿# 2.1 기본 설정
+# 2.1 Basic Settings
 
-플라즈마 절단 응용은 하이퍼썸(Hypertherm) XPR 절단기와 이더캣 통신을 수행합니다. 또한 터치센싱과 높이 제어를 위해 아크 응용의 일부 기능을 차용합니다. 따라서, 이더캣 설정과 블럭할당, 아크 용접기 및 신호 설정 등에 대한 설정이 필요합니다.
+The plasma cutting application communicates with a Hypertherm XPR plasma cutting system over EtherCAT. It also uses some arc-welding application functions for touch sensing and height control. EtherCAT, block assignment, arc welder, and signal settings must therefore be configured.
