@@ -1,4 +1,4 @@
-# 5. Warnings and Errors
+﻿# 5. Warnings and Errors
 
 This chapter describes the main errors that may occur while using the plasma cutting function and explains how to correct them.
 
