@@ -22,7 +22,7 @@
     * [2.4.2 plasma on/off 명령어](2-application/4-programming/2-cmd.md)
     * [2.4.3 프로그램 기본 구조](2-application/4-programming/3-prog-structure.md)
 * [3. 작업 절차](3-workflow/README.md)
-  * [3.1 작업 순서](3-workflow/1-scenario.md)
+  * [3.1 설정 순서](3-workflow/1-scenario.md)
   * [3.2 절단 작업 실행](3-workflow/2-implement.md)
 * [4. 추가 기능](4-additional/README.md)
   * [4.1 가스 수동 출력](4-additional/1-manualout.md)

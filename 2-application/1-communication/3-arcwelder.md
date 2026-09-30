@@ -89,19 +89,14 @@ FB 블럭할당에서 fb1을 선택한 경우 아래 표와 같은 주소가 자
       <td align="center">fb1.11</td>
     </tr>
     <tr>
-      <td align="center">용접 전류</td>
-      <td align="center">전류</td>
-      <td align="center">fb1.16 ~ fb1.31</td>
-    </tr>
-    <tr>
       <td align="center">용접 전압</td>
       <td align="center">전압</td>
-      <td align="center">fb1.48 ~ fb1.63</td>
+      <td align="center">fb1.16 ~ fb1.31</td>
     </tr>
     <tr>
       <td align="center">용접기 에러 번호</td>
       <td align="center">에러 번호</td>
-      <td align="center">fb1.8 ~ fb1.23</td>
+      <td align="center">fb1.48 ~ fb1.63</td>
     </tr>
     <tr>
       <td align="center" rowspan="3"><strong>출력</strong></td>
