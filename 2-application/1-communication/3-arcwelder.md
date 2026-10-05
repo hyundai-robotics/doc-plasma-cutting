@@ -48,7 +48,7 @@ FB 블럭할당에서 fb1을 선택한 경우 아래 표와 같은 주소가 자
   </thead>
   <tbody>
     <tr>
-      <td align="center" rowspan="11">입력</td>
+      <td align="center" rowspan="10">입력</td>
       <td align="center">용접기 사용 가능</td>
       <td align="center">원격 전원 상태(remote power status)</td>
       <td align="center">fb1.9</td>
